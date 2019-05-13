@@ -16,6 +16,7 @@ class App extends React.Component {
     }
     componentDidMount() {
         axios.get("/api/checkuser").then(({ data }) => {
+            console.log("data in app", data);
             this.props.dispatch(setUserData(data.user));
         });
     }

@@ -22,8 +22,12 @@ class Register extends React.Component {
         axios
             .post("/register", this.state)
             .then(({ data }) => {
-                this.props.dispatch(setUserData(data.user));
-                this.props.toggleLogin();
+                if (data.error) {
+                    this.setState({ error: data.error });
+                } else {
+                    this.props.dispatch(setUserData(data.user));
+                    this.props.toggleLogin();
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -32,7 +36,7 @@ class Register extends React.Component {
     render() {
         return (
             <div className="register">
-                {this.props.user.error && (
+                {this.state.error && (
                     <div className="error">
                         Oooops, something broke, YOU BROKE ITTTT!!!
                     </div>

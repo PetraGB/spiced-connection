@@ -19,11 +19,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get("/api/checkuser", (req, res) => {
-    console.log("hoi");
-    console.log(req.session.user);
-    if (req.session.user.id) {
+    if (req.session.user) {
         const user = req.session.user;
-        res.json({ user, error: false });
+        res.json({ user });
+    } else {
+        res.json({ user: {} });
     }
 });
 
@@ -51,11 +51,8 @@ app.post("/register", (req, res) => {
                                 )
                                 .then(({ rows }) => {
                                     req.session.user = rows[0];
-                                    const user = {
-                                        error: false,
-                                        ...rows[0]
-                                    };
-                                    res.json({ user });
+                                    const user = { ...rows[0] };
+                                    res.json({ user, error: false });
                                 });
                         });
                 } else {
@@ -65,7 +62,7 @@ app.post("/register", (req, res) => {
         })
         .catch(err => {
             console.log("error from register route: ", err);
-            res.json({ user: { error: true } });
+            res.json({ error: true });
         });
 });
 

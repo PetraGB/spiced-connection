@@ -1,4 +1,4 @@
-export default function(state = { user: {} }, action) {
+export default function(state = {}, action) {
     if (action.type == "SET_USER_DATA") {
         state = {
             ...state,

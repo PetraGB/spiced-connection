@@ -1,8 +1,9 @@
 import React from "react";
+import axios from "./axios";
 
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-// import { } from "./actions";
+import { setUserData } from "./actions";
 
 import Logforms from "./logforms";
 
@@ -13,8 +14,8 @@ class Header extends React.Component {
             logformsVisible: false
         };
         this.toggleLogforms = this.toggleLogforms.bind(this);
+        this.logout = this.logout.bind(this);
     }
-    componentDidMount() {}
     toggleLogforms() {
         if (this.state.logformsVisible) {
             this.setState({ logformsVisible: false });
@@ -22,11 +23,16 @@ class Header extends React.Component {
             this.setState({ logformsVisible: true });
         }
     }
+    logout() {
+        axios.get("/logout").then(() => {
+            this.props.dispatch(setUserData({ user: {} }));
+        });
+    }
     render() {
         return (
             <div className="header">
-                {this.props.user.id ? (
-                    <div>Picture here</div>
+                {this.props.user ? (
+                    <div onClick={this.logout}>Logout</div>
                 ) : (
                     <div onClick={this.toggleLogforms}>Log in!</div>
                 )}
