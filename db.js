@@ -5,9 +5,16 @@ const db = spicedPg(
         "postgres:postgres:postgres@localhost:5432/connection"
 );
 
-function checkEmail(email) {
-    let q = "SELECT COUNT(*) FROM users WHERE email = $1;";
-    let params = [email];
+function checkByEmail(email) {
+    const q =
+        "SELECT id, journalist, editor, admin FROM users WHERE email = $1;";
+    const params = [email];
+    return db.query(q, params);
+}
+
+function getPass(email) {
+    const q = "SELECT password FROM users WHERE email = ($1);";
+    const params = [email];
     return db.query(q, params);
 }
 
@@ -19,6 +26,7 @@ function addUser(first, last, email, password) {
 }
 
 module.exports = {
-    checkEmail,
-    addUser
+    checkByEmail,
+    addUser,
+    getPass
 };

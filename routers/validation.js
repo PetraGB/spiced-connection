@@ -23,14 +23,14 @@ app.get("/api/checkuser", (req, res) => {
         const user = req.session.user;
         res.json({ user });
     } else {
-        res.json({ user: {} });
+        res.json({ user: null });
     }
 });
 
 app.post("/register", (req, res) => {
     db.checkEmail(req.body.email)
-        .then(useCount => {
-            if (useCount.rows[0].count > 0) {
+        .then(({ rows }) => {
+            if (rows.length == 0) {
                 throw new Error("This email is already being used!");
             } else {
                 if (
@@ -67,20 +67,20 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    db.checkEmail(req.body.email)
-        .then(useCount => {
-            if (useCount.rows[0].count == 0) {
+    db.checkByEmail(req.body.email)
+        .then(({ rows }) => {
+            if (rows.length == 0) {
                 throw new Error("We don't know this email.");
             } else {
-                return db.getPass(req.body.email).then(({ rows }) => {
-                    const cryptedPass = rows[0].password;
-                    const id = rows[0].id;
+                return db.getPass(req.body.email).then(pass => {
+                    const cryptedPass = pass.rows[0].password;
                     return bc
                         .checkPassword(req.body.password, cryptedPass)
                         .then(doesMatch => {
                             if (doesMatch) {
-                                req.session.userId = id;
-                                res.json({ error: false });
+                                req.session.user = rows[0];
+                                const user = { ...rows[0] };
+                                res.json({ user, error: false });
                             } else {
                                 throw new Error(
                                     "Password does not match, sorry."
@@ -92,11 +92,11 @@ app.post("/login", (req, res) => {
         })
         .catch(err => {
             console.log("error from register route: ", err);
-            res.json({ error: err.message });
+            res.json({ error: true });
         });
 });
 
 app.get("/logout", (req, res) => {
     req.session = null;
-    res.redirect("/");
+    res.json({ user: null });
 });

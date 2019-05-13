@@ -24,11 +24,14 @@ class Header extends React.Component {
         }
     }
     logout() {
-        axios.get("/logout").then(() => {
-            this.props.dispatch(setUserData({ user: {} }));
+        axios.get("/logout").then(({ data }) => {
+            this.props.dispatch(setUserData(data.user));
+            location.replace("/");
         });
     }
     render() {
+        console.log("props in header", this.props);
+        console.log("user", this.props.user, this.props.user == true);
         return (
             <div className="header">
                 {this.props.user ? (
