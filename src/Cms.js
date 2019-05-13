@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 // import { } from "./actions";
 
+import Login from "./login";
+
 class Cms extends React.Component {
     constructor(props) {
         super(props);
@@ -14,10 +16,36 @@ class Cms extends React.Component {
         console.log(this.props);
         return (
             <div className="cms">
-                {this.props.user.loggedIn ? (
-                    <div>Hello, World! I am the cms.</div>
+                {this.props.user ? (
+                    <div>
+                        <p>Hello, World! I am the cms.</p>
+                        {this.props.user.journalist ? (
+                            <div>
+                                <p>Journalist is logged in</p>
+                                {this.props.user.editor ? (
+                                    <div>
+                                        <p>Editor is logged in</p>
+                                        {this.props.user.admin ? (
+                                            <div>Editor is logged in</div>
+                                        ) : (
+                                            <div>
+                                                You are the highest member
+                                            </div>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <div>You are a mear journalist, sorry</div>
+                                )}
+                            </div>
+                        ) : (
+                            <div>You are a mear user, sorry</div>
+                        )}
+                    </div>
                 ) : (
-                    <div>I am sorry, you are not logged in yet</div>
+                    <div>
+                        <h2>I am sorry, you are not logged in yet</h2>
+                        <Login />
+                    </div>
                 )}
             </div>
         );

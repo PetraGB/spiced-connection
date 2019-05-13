@@ -91,7 +91,7 @@ app.post("/login", (req, res) => {
             }
         })
         .catch(err => {
-            console.log("error from register route: ", err);
+            console.log("error from login route: ", err);
             res.json({ error: true });
         });
 });

@@ -22,10 +22,17 @@ class Login extends React.Component {
         axios
             .post("/login", this.state)
             .then(({ data }) => {
-                this.props.dispatch(setUserData(data.user));
-                this.props.toggleLogin();
+                if (!data.error) {
+                    this.props.dispatch(setUserData(data.user));
+                    if (this.props.toggleLogin) {
+                        this.props.toggleLogin();
+                    }
+                } else {
+                    this.setState({ error: true });
+                }
             })
             .catch(err => {
+                this.setState({ error: true });
                 console.log(err);
             });
     }

@@ -22,14 +22,17 @@ class Register extends React.Component {
         axios
             .post("/register", this.state)
             .then(({ data }) => {
-                if (data.error) {
-                    this.setState({ error: data.error });
-                } else {
+                if (!data.error) {
                     this.props.dispatch(setUserData(data.user));
-                    this.props.toggleLogin();
+                    if (this.props.toggleLogin) {
+                        this.props.toggleLogin();
+                    }
+                } else {
+                    this.setState({ error: true });
                 }
             })
             .catch(err => {
+                this.setState({ error: true });
                 console.log(err);
             });
     }
