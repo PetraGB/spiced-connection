@@ -32,7 +32,6 @@ class Login extends React.Component {
     render() {
         return (
             <div className="login">
-                <div onClick={this.props.toggleLogin}>X</div>
                 {this.state.error && (
                     <div className="error">
                         Oooops, something broke, YOU BROKE ITTTT!!!
@@ -53,10 +52,6 @@ class Login extends React.Component {
                     />
                     <button onClick={this.login}>Login</button>
                 </form>
-                <p>Don{"'"}t have an account yet?</p>
-                <Link to="/register" onClick={this.props.toggleLogin}>
-                    Register!
-                </Link>
             </div>
         );
     }

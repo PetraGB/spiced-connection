@@ -4,34 +4,34 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 // import { } from "./actions";
 
-import Login from "./login";
+import Logforms from "./logforms";
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loginVisible: false
+            logformsVisible: false
         };
-        this.toggleLogin = this.toggleLogin.bind(this);
+        this.toggleLogforms = this.toggleLogforms.bind(this);
     }
     componentDidMount() {}
-    toggleLogin() {
-        if (this.state.loginVisible) {
-            this.setState({ loginVisible: false });
+    toggleLogforms() {
+        if (this.state.logformsVisible) {
+            this.setState({ logformsVisible: false });
         } else {
-            this.setState({ loginVisible: true });
+            this.setState({ logformsVisible: true });
         }
     }
     render() {
         return (
             <div className="header">
-                {this.props.user.loggedIn ? (
+                {this.props.user.id ? (
                     <div>Picture here</div>
                 ) : (
-                    <div onClick={this.toggleLogin}>Log in!</div>
+                    <div onClick={this.toggleLogforms}>Log in!</div>
                 )}
-                {this.state.loginVisible && (
-                    <Login toggleLogin={this.toggleLogin} />
+                {this.state.logformsVisible && (
+                    <Logforms toggleLogin={this.toggleLogforms} />
                 )}
             </div>
         );

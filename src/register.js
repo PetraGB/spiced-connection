@@ -23,6 +23,7 @@ class Register extends React.Component {
             .post("/register", this.state)
             .then(({ data }) => {
                 this.props.dispatch(setUserData(data.user));
+                this.props.toggleLogin();
             })
             .catch(err => {
                 console.log(err);
@@ -30,8 +31,8 @@ class Register extends React.Component {
     }
     render() {
         return (
-            <div className="login">
-                {this.state.error && (
+            <div className="register">
+                {this.props.user.error && (
                     <div className="error">
                         Oooops, something broke, YOU BROKE ITTTT!!!
                     </div>
@@ -40,13 +41,13 @@ class Register extends React.Component {
                 <form>
                     <input
                         type="text"
-                        name="firstName"
+                        name="first"
                         placeholder="First Name"
                         onChange={this.inputting}
                     />
                     <input
                         type="text"
-                        name="lastName"
+                        name="last"
                         placeholder="Last Name"
                         onChange={this.inputting}
                     />
