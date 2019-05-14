@@ -15,7 +15,7 @@ app.post("/api/article/add", requireJournalist, (req, res) => {
     const title = req.body.title;
     const article = req.body.article;
     const picture = req.body.picture;
-    const summary = req.body.picture;
+    const summary = req.body.summary;
     const writerid = req.session.user.id;
 
     if (!title || !article) {
@@ -35,8 +35,8 @@ app.post("/api/article/add", requireJournalist, (req, res) => {
 app.get("/api/article/:id", (req, res) => {
     db.getArticle(req.params.id)
         .then(({ rows }) => {
-            const profile = rows[0];
-            res.json({ profile });
+            const article = rows[0];
+            res.json({ article });
         })
         .catch();
 });

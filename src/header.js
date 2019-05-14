@@ -27,7 +27,7 @@ class Header extends React.Component {
     logout() {
         axios.get("/logout").then(({ data }) => {
             this.props.dispatch(setUserData(data.user));
-            location.replace("/");
+            // location.replace("/");
         });
     }
     render() {

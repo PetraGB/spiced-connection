@@ -13,7 +13,7 @@ class Navcms extends React.Component {
         return (
             <div className="navcms">
                 {this.props.user.status > 1 && (
-                    <Link to="/cms/article">New Article</Link>
+                    <Link to="/cms/article/0">New Article</Link>
                 )}
                 {this.props.user.status > 2 && (
                     <Link to="/cms/links">New Link</Link>

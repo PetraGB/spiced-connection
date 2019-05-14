@@ -46,11 +46,17 @@ function publishArticle(id) {
     return db.query(q, params);
 }
 
+function getArticle(id) {
+    const q = "SELECT * FROM articles WHERE id = $1";
+    return db.query(q, [id]);
+}
+
 module.exports = {
     checkByEmail,
     addUser,
     getPass,
     getProfileById,
     addArticle,
-    publishArticle
+    publishArticle,
+    getArticle
 };

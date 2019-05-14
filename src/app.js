@@ -34,7 +34,7 @@ class App extends React.Component {
                     <Route path="/register" component={Register} />
                     <Route path="/self" component={Self} />
                     <Route path="/profile/:id" component={Profile} />
-                    <Route path="/cms/article" component={Articlecms} />
+                    <Route path="/cms/article/:id" component={Articlecms} />
                     <Route path="/cms/links" component={Linkscms} />
                     <Route path="/cms/users" component={Userscms} />
                 </div>
