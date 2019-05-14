@@ -8,6 +8,8 @@ import { setUserData } from "./actions";
 import Cms from "./cms";
 import Header from "./header";
 import Register from "./register";
+import Self from "./self";
+import Profile from "./profile";
 
 class App extends React.Component {
     constructor(props) {
@@ -27,6 +29,8 @@ class App extends React.Component {
                     <Header />
                     <Route path="/register" component={Register} />
                     <Route path="/cms" component={Cms} />
+                    <Route path="/self" component={Self} />
+                    <Route path="/profile/:id" component={Profile} />
                 </div>
             </BrowserRouter>
         );

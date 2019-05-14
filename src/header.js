@@ -35,7 +35,21 @@ class Header extends React.Component {
         return (
             <div className="header">
                 {this.props.user ? (
-                    <div onClick={this.logout}>Logout</div>
+                    <div className="loggedInHeader">
+                        {this.props.user.status > 1 && (
+                            <div>
+                                <Link to="/cms">cms</Link>
+                            </div>
+                        )}
+                        <Link to="/profile">
+                            <img
+                                src={this.props.user.picture || "/default.png"}
+                            />
+                        </Link>
+                        <p className="linkify" onClick={this.logout}>
+                            Logout
+                        </p>
+                    </div>
                 ) : (
                     <div onClick={this.toggleLogforms}>Log in!</div>
                 )}
