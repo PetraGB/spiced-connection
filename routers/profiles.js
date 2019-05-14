@@ -1,6 +1,12 @@
 const { app } = require("../index");
 
 const db = require("../db");
+const {
+    requireUser,
+    requireJournalist,
+    requireEditor,
+    requireAdmin
+} = require("../middleware");
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());

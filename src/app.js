@@ -5,11 +5,14 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { setUserData } from "./actions";
 
-import Cms from "./cms";
+import Home from "./home";
 import Header from "./header";
 import Register from "./register";
 import Self from "./self";
 import Profile from "./profile";
+import Articlecms from "./articlecms";
+import Linkscms from "./linkscms";
+import Userscms from "./userscms";
 
 class App extends React.Component {
     constructor(props) {
@@ -27,10 +30,13 @@ class App extends React.Component {
             <BrowserRouter>
                 <div className="app">
                     <Header />
+                    <Route exact path="/" component={Home} />
                     <Route path="/register" component={Register} />
-                    <Route path="/cms" component={Cms} />
                     <Route path="/self" component={Self} />
                     <Route path="/profile/:id" component={Profile} />
+                    <Route path="/cms/article" component={Articlecms} />
+                    <Route path="/cms/links" component={Linkscms} />
+                    <Route path="/cms/users" component={Userscms} />
                 </div>
             </BrowserRouter>
         );

@@ -31,7 +31,8 @@ if (process.env.NODE_ENV != "production") {
 app.use(express.static("./public"));
 
 require("./routers/validation");
-require("./routers/see");
+require("./routers/profiles");
+require("./routers/articles");
 
 app.get("*", function(req, res) {
     res.sendFile(__dirname + "/index.html");

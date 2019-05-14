@@ -2,11 +2,7 @@ import React from "react";
 import axios from "./axios";
 
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { setUserData } from "./actions";
-
-import Login from "./login";
-import Register from "./register";
+// import { Link } from "react-router-dom";
 
 class Profile extends React.Component {
     constructor(props) {

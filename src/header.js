@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { setUserData } from "./actions";
 
 import Logforms from "./logforms";
+import Navcms from "./navcms";
 
 class Header extends React.Component {
     constructor(props) {
@@ -30,17 +31,11 @@ class Header extends React.Component {
         });
     }
     render() {
-        console.log("props in header", this.props);
-        console.log("user", this.props.user, this.props.user == true);
         return (
             <div className="header">
                 {this.props.user ? (
                     <div className="loggedInHeader">
-                        {this.props.user.status > 1 && (
-                            <div>
-                                <Link to="/cms">cms</Link>
-                            </div>
-                        )}
+                        {this.props.user.status > 1 && <Navcms />}
                         <Link to="/profile">
                             <img
                                 src={this.props.user.picture || "/default.png"}

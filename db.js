@@ -32,9 +32,25 @@ function getProfileById(id) {
     return db.query(q, params);
 }
 
+function addArticle(title, article, picture, summary, writerid) {
+    const q =
+        "INSERT INTO articles (title, article, picture, summary, writerid) VALUES ($1, $2, $3, $4, $5) RETURNING id";
+    const params = [title, article, picture, summary, writerid];
+    return db.query(q, params);
+}
+
+function publishArticle(id) {
+    const q =
+        "UPDATE articles SET published = CURRENT_TIMESTAMP, public = true WHERE id = $1;";
+    const params = [id];
+    return db.query(q, params);
+}
+
 module.exports = {
     checkByEmail,
     addUser,
     getPass,
-    getProfileById
+    getProfileById,
+    addArticle,
+    publishArticle
 };

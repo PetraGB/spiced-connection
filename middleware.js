@@ -6,21 +6,21 @@ function requireUser(req, res, next) {
 }
 
 function requireJournalist(req, res, next) {
-    if (!req.session.user.journalist) {
+    if (req.session.user.status < 2) {
         return res.redirect("/");
     }
     next();
 }
 
 function requireEditor(req, res, next) {
-    if (!req.session.user.editor) {
+    if (req.session.user.status < 3) {
         return res.redirect("/");
     }
     next();
 }
 
 function requireAdmin(req, res, next) {
-    if (!req.session.user.admin.admin) {
+    if (req.session.user.status < 4) {
         return res.redirect("/");
     }
     next();
