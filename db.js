@@ -25,8 +25,16 @@ function addUser(first, last, email, password) {
     return db.query(q, params);
 }
 
+function getProfileById(id) {
+    const q =
+        "SELECT id, first, last, picture, bio, status FROM users WHERE id = $1";
+    const params = [id];
+    return db.query(q, params);
+}
+
 module.exports = {
     checkByEmail,
     addUser,
-    getPass
+    getPass,
+    getProfileById
 };

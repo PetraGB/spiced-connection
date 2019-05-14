@@ -18,7 +18,11 @@ class Profile extends React.Component {
         console.log(id);
         axios
             .get("/api/user/" + id)
-            .then()
+            .then(({ data }) => {
+                const profile = data.profile;
+                this.setState({ profile });
+                console.log("state in profile", this.state);
+            })
             .catch();
     }
     render() {
@@ -27,7 +31,11 @@ class Profile extends React.Component {
                 {this.state.profile ? (
                     <div className="nameAndPic">
                         <div className="profilePic">
-                            <img src={this.state.profile.picture} />
+                            <img
+                                src={
+                                    this.state.profile.picture || "/default.png"
+                                }
+                            />
                         </div>
                         <h3>
                             {this.state.profile.first} {this.state.profile.last}

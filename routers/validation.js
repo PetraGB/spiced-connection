@@ -15,7 +15,7 @@ app.use(function(req, res, next) {
 });
 
 const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get("/api/checkuser", (req, res) => {

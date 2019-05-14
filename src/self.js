@@ -19,7 +19,9 @@ class Self extends React.Component {
                 {this.props.user ? (
                     <div className="profileComp">
                         <div className="profilePic">
-                            <img src={this.props.user.picture} />
+                            <img
+                                src={this.props.user.picture || "/default.png"}
+                            />
                         </div>
                         <h3>
                             {this.props.user.first} {this.props.user.last}
