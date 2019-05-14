@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "./axios";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { setUserData } from "./actions";
@@ -34,7 +34,7 @@ class App extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return {};
+    return { user: state.user };
 }
 
 export default connect(mapStateToProps)(App);

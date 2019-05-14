@@ -1,7 +1,7 @@
 import React from "react";
 
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 // import { } from "./actions";
 
 import Login from "./login";
@@ -19,17 +19,17 @@ class Cms extends React.Component {
                 {this.props.user ? (
                     <div>
                         <p>Hello, World! I am the cms.</p>
-                        {this.props.user.journalist ? (
+                        {this.props.user.status > 1 ? (
                             <div>
                                 <p>Journalist is logged in</p>
-                                {this.props.user.editor ? (
+                                {this.props.user.status > 2 ? (
                                     <div>
                                         <p>Editor is logged in</p>
-                                        {this.props.user.admin ? (
-                                            <div>Editor is logged in</div>
+                                        {this.props.user.status > 3 ? (
+                                            <div>Admin is logged in</div>
                                         ) : (
                                             <div>
-                                                You are the highest member
+                                                You are not the highest member
                                             </div>
                                         )}
                                     </div>

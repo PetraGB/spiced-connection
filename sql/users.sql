@@ -8,7 +8,5 @@ CREATE TABLE users(
     password VARCHAR(300) NOT NULL,
     picture VARCHAR(300),
     bio VARCHAR(500),
-    journalist BOOLEAN DEFAULT false,
-    editor BOOLEAN DEFAULT false,
-    admin BOOLEAN DEFAULT false
+    status INTEGER NOT NULL DEFAULT 1
 );

@@ -6,8 +6,7 @@ const db = spicedPg(
 );
 
 function checkByEmail(email) {
-    const q =
-        "SELECT id, journalist, editor, admin FROM users WHERE email = $1;";
+    const q = "SELECT id, status FROM users WHERE email = $1;";
     const params = [email];
     return db.query(q, params);
 }
@@ -20,7 +19,7 @@ function getPass(email) {
 
 function addUser(first, last, email, password) {
     const q =
-        "INSERT INTO users (first, last, email, password) VALUES ($1, $2, $3, $4) RETURNING id, journalist, editor, admin;";
+        "INSERT INTO users (first, last, email, password) VALUES ($1, $2, $3, $4) RETURNING id, status;";
     const params = [first, last, email, password];
     return db.query(q, params);
 }
