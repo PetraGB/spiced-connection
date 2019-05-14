@@ -13,6 +13,7 @@ import Profile from "./profile";
 import Articlecms from "./articlecms";
 import Linkscms from "./linkscms";
 import Userscms from "./userscms";
+import Article from "./article";
 
 class App extends React.Component {
     constructor(props) {
@@ -37,6 +38,7 @@ class App extends React.Component {
                     <Route path="/cms/article/:id" component={Articlecms} />
                     <Route path="/cms/links" component={Linkscms} />
                     <Route path="/cms/users" component={Userscms} />
+                    <Route path="/article/:id" component={Article} />
                 </div>
             </BrowserRouter>
         );
