@@ -9,7 +9,7 @@ class Articlecms extends React.Component {
         super(props);
         this.state = {
             currentArticle: {
-                id: "",
+                id: 0,
                 title: "",
                 article: "",
                 picture: "",
@@ -47,12 +47,23 @@ class Articlecms extends React.Component {
     }
     uploadArticle(e) {
         e.preventDefault();
-        axios
-            .post("/api/article/add", this.state.currentArticle)
-            .then(({ data }) => {
-                location.replace("/cms/article/" + data.newArticle.id);
-            })
-            .catch();
+        const id = this.state.currentArticle.id;
+        if (id == 0) {
+            axios
+                .post("/api/article/add", this.state.currentArticle)
+                .then(({ data }) => {
+                    location.replace("/cms/article/" + data.id);
+                })
+                .catch();
+        } else {
+            axios
+                .post("/api/article/adjust", this.state.currentArticle)
+                .then(({ data }) => {
+                    console.log("data in update", data);
+                    location.replace("/cms/article/" + data.id);
+                })
+                .catch();
+        }
     }
     render() {
         console.log(this.state);

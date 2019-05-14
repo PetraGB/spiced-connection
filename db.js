@@ -39,6 +39,13 @@ function addArticle(title, article, picture, summary, writerid) {
     return db.query(q, params);
 }
 
+function updateArticle(id, title, article, picture, summary, writerid) {
+    const q =
+        "UPDATE articles SET title = $2, article = $3, picture = $4, summary = $5, writerid = $6 WHERE id = $1";
+    const params = [id, title, article, picture, summary, writerid];
+    return db.query(q, params);
+}
+
 function publishArticle(id) {
     const q =
         "UPDATE articles SET published = CURRENT_TIMESTAMP, public = true WHERE id = $1;";
@@ -57,6 +64,7 @@ module.exports = {
     getPass,
     getProfileById,
     addArticle,
+    updateArticle,
     publishArticle,
     getArticle
 };
