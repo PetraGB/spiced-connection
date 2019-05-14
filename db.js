@@ -7,7 +7,7 @@ const db = spicedPg(
 
 function checkByEmail(email) {
     const q =
-        "SELECT id, first, last, picture, bio, status FROM users WHERE email = $1;";
+        "SELECT id, first, last, pictures, atpicture, bio, status, read, atbook FROM users WHERE email = $1;";
     const params = [email];
     return db.query(q, params);
 }
@@ -27,22 +27,30 @@ function addUser(first, last, email, password) {
 
 function getProfileById(id) {
     const q =
-        "SELECT id, first, last, picture, bio, status FROM users WHERE id = $1";
+        "SELECT id, first, last, pictures, atpicture, bio, status FROM users WHERE id = $1";
     const params = [id];
     return db.query(q, params);
 }
 
-function addArticle(title, article, picture, summary, writerid) {
+function addArticle(title, article, pictures, atpicture, summary, writerid) {
     const q =
-        "INSERT INTO articles (title, article, picture, summary, writerid) VALUES ($1, $2, $3, $4, $5) RETURNING id";
-    const params = [title, article, picture, summary, writerid];
+        "INSERT INTO articles (title, article, pictures, atpicture, summary, writerid) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id";
+    const params = [title, article, pictures, atpicture, summary, writerid];
     return db.query(q, params);
 }
 
-function updateArticle(id, title, article, picture, summary, writerid) {
+function updateArticle(
+    id,
+    title,
+    article,
+    pictures,
+    atpicture,
+    summary,
+    writerid
+) {
     const q =
-        "UPDATE articles SET title = $2, article = $3, picture = $4, summary = $5, writerid = $6 WHERE id = $1";
-    const params = [id, title, article, picture, summary, writerid];
+        "UPDATE articles SET title = $2, article = $3, pictures = $4, atpicture=$5, summary = $6, writerid = $7 WHERE id = $1";
+    const params = [id, title, article, pictures, atpicture, summary, writerid];
     return db.query(q, params);
 }
 
@@ -58,6 +66,12 @@ function getArticle(id) {
     return db.query(q, [id]);
 }
 
+function updateRead(id, read) {
+    const q = "UPDATE users SET read = $2 WHERE id = $1;";
+    const params = [id, read];
+    return db.query(q, params);
+}
+
 module.exports = {
     checkByEmail,
     addUser,
@@ -66,5 +80,6 @@ module.exports = {
     addArticle,
     updateArticle,
     publishArticle,
-    getArticle
+    getArticle,
+    updateRead
 };

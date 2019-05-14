@@ -6,7 +6,10 @@ CREATE TABLE users(
     last VARCHAR(200) NOT NULL,
     email VARCHAR(200) NOT NULL,
     password VARCHAR(300) NOT NULL,
-    picture VARCHAR(300),
+    pictures TEXT [],
+    atpicture INTEGER,
     bio VARCHAR(500),
-    status INTEGER NOT NULL DEFAULT 1
+    status INTEGER NOT NULL DEFAULT 1,
+    read INTEGER [],
+    atbook INTEGER
 );

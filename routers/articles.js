@@ -14,14 +14,15 @@ app.use(bodyParser.json());
 app.post("/api/article/add", requireJournalist, (req, res) => {
     const title = req.body.title;
     const article = req.body.article;
-    const picture = req.body.picture;
+    const pictures = req.body.pictures;
+    const atpicture = req.body.atpicture;
     const summary = req.body.summary;
     const writerid = req.session.user.id;
 
     if (!title || !article) {
         res.json({ error: "There is no article to upload" });
     } else {
-        db.addArticle(title, article, picture, summary, writerid)
+        db.addArticle(title, article, pictures, atpicture, summary, writerid)
             .then(({ rows }) => {
                 res.json(rows[0]);
             })
@@ -36,14 +37,23 @@ app.post("/api/article/adjust", requireJournalist, (req, res) => {
     const id = req.body.id;
     const title = req.body.title;
     const article = req.body.article;
-    const picture = req.body.picture;
+    const pictures = req.body.pictures;
+    const atpicture = req.body.atpicture;
     const summary = req.body.summary;
     const writerid = req.session.user.id;
 
     if (!title || !article) {
         res.json({ error: "There is no article to upload" });
     } else {
-        db.updateArticle(id, title, article, picture, summary, writerid)
+        db.updateArticle(
+            id,
+            title,
+            article,
+            pictures,
+            atpicture,
+            summary,
+            writerid
+        )
             .then(({ rows }) => {
                 res.json({ id });
             })

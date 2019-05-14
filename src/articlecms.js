@@ -69,32 +69,49 @@ class Articlecms extends React.Component {
         console.log(this.state);
         return (
             <div className="articlecms">
-                <div>lalalal</div>
-                <form>
-                    <p className="inputTag">Title</p>
-                    <input
-                        type="text"
-                        name="title"
-                        placeholder="Title"
-                        value={this.state.currentArticle.title}
-                        onChange={this.inputting}
-                    />
-                    <p className="inputTag">Text</p>
-                    <textarea
-                        name="article"
-                        type="text"
-                        value={this.state.currentArticle.article}
-                        onChange={this.inputting}
-                    />
-                    <p className="inputTag">Summary</p>
-                    <textarea
-                        name="summary"
-                        type="text"
-                        value={this.state.currentArticle.summary}
-                        onChange={this.inputting}
-                    />
-                    <button onClick={this.uploadArticle}>Upload</button>
-                </form>
+                {this.props.user ? (
+                    <div className="articleForm">
+                        {this.props.user.status > 1 ? (
+                            <div>
+                                <form>
+                                    <p className="inputTag">Title</p>
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        placeholder="Title"
+                                        value={this.state.currentArticle.title}
+                                        onChange={this.inputting}
+                                    />
+                                    <p className="inputTag">Text</p>
+                                    <textarea
+                                        name="article"
+                                        type="text"
+                                        value={
+                                            this.state.currentArticle.article
+                                        }
+                                        onChange={this.inputting}
+                                    />
+                                    <p className="inputTag">Summary</p>
+                                    <textarea
+                                        name="summary"
+                                        type="text"
+                                        value={
+                                            this.state.currentArticle.summary
+                                        }
+                                        onChange={this.inputting}
+                                    />
+                                    <button onClick={this.uploadArticle}>
+                                        Upload
+                                    </button>
+                                </form>
+                            </div>
+                        ) : (
+                            <div>please log in as a journalist</div>
+                        )}
+                    </div>
+                ) : (
+                    <div>Nothing to see here</div>
+                )}
             </div>
         );
     }
