@@ -22,7 +22,6 @@ class App extends React.Component {
     }
     componentDidMount() {
         axios.get("/api/checkuser").then(({ data }) => {
-            console.log("data in app", data);
             this.props.dispatch(setUserData(data.user));
         });
     }
@@ -38,7 +37,16 @@ class App extends React.Component {
                     <Route path="/cms/article/:id" component={Articlecms} />
                     <Route path="/cms/links" component={Linkscms} />
                     <Route path="/cms/users" component={Userscms} />
-                    <Route path="/article/:id" component={Article} />
+                    <Route
+                        path="/article/:id"
+                        render={props => (
+                            <Article
+                                key={props.match.url}
+                                match={props.match}
+                                history={props.history}
+                            />
+                        )}
+                    />
                 </div>
             </BrowserRouter>
         );

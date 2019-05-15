@@ -98,6 +98,12 @@ function updateLink(origin, destination, explanation, kind, editorid, id) {
     return db.query(q, params);
 }
 
+function getLinksByOrigin(origin) {
+    const q = "SELECT * FROM links WHERE origin = $1";
+    const params = [origin];
+    return db.query(q, params);
+}
+
 module.exports = {
     checkByEmail,
     addUser,
@@ -112,5 +118,6 @@ module.exports = {
     getArticle,
     updateRead,
     addLink,
-    updateLink
+    updateLink,
+    getLinksByOrigin
 };

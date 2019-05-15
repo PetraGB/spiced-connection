@@ -4,6 +4,8 @@ import axios from "./axios";
 import { connect } from "react-redux";
 // import { Link } from "react-router-dom";
 
+import Linkies from "./linkies";
+
 class Article extends React.Component {
     constructor(props) {
         super(props);
@@ -28,7 +30,6 @@ class Article extends React.Component {
             .then(({ data }) => {
                 const currentArticle = data.article;
                 this.setState({ currentArticle });
-                console.log(this.state);
             })
             .catch(err => {
                 this.setState({ error: true });
@@ -36,7 +37,6 @@ class Article extends React.Component {
             });
     }
     render() {
-        console.log(this.state);
         return (
             <div className="article">
                 {this.state.currentArticle.publish ? (
@@ -54,6 +54,7 @@ class Article extends React.Component {
                 ) : (
                     <div>There is no such article</div>
                 )}
+                <Linkies articleid={this.props.match.params.id} />
             </div>
         );
     }

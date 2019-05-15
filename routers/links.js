@@ -11,6 +11,16 @@ const {
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
+app.get("/api/links/:origin", (req, res) => {
+    db.getLinksByOrigin(req.params.origin)
+        .then(({ rows }) => {
+            res.json({ links: rows });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
 app.post("/api/link/add", requireEditor, async (req, res) => {
     console.log(req.body);
     let kind;
