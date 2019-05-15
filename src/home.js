@@ -10,7 +10,7 @@ class Home extends React.Component {
         this.state = {};
     }
     render() {
-        return <div className="home">welcome homeeee</div>;
+        return <div className="home verContainer">welcome homeeee</div>;
     }
 }
 

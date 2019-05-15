@@ -11,7 +11,7 @@ class Navcms extends React.Component {
     }
     render() {
         return (
-            <div className="navcms">
+            <div className="navcms horContainer">
                 {this.props.user.status > 1 && (
                     <Link to="/cms/article/0">New Article</Link>
                 )}

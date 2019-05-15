@@ -45,7 +45,7 @@ class Register extends React.Component {
                     </div>
                 )}
                 <div>Please fill out your information to make an account.</div>
-                <form>
+                <form className="verContainer">
                     <input
                         type="text"
                         name="first"

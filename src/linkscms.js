@@ -49,9 +49,9 @@ class Linkscms extends React.Component {
     }
     render() {
         return (
-            <div className="linkscms">
+            <div className="linkscms verContainer">
                 {this.state.error && <p>{"Something went wrong"}</p>}
-                <form>
+                <form className="verContainer">
                     <label htmlFor="origin" className="inputTag">
                         Origin
                     </label>
@@ -88,46 +88,48 @@ class Linkscms extends React.Component {
                         id="reverseExplanation"
                         onChange={this.inputting}
                     />
-                    <input
-                        type="radio"
-                        name="kind"
-                        value="1"
-                        id="reason"
-                        onChange={this.inputting}
-                    />
-                    <label htmlFor="reason">Reason</label>
-                    <input
-                        type="radio"
-                        name="kind"
-                        value="2"
-                        id="reason"
-                        onChange={this.inputting}
-                    />
-                    <label htmlFor="reason">Effect</label>
-                    <input
-                        type="radio"
-                        name="kind"
-                        value="3"
-                        id="reason"
-                        onChange={this.inputting}
-                    />
-                    <label htmlFor="reason">Broad</label>
-                    <input
-                        type="radio"
-                        name="kind"
-                        value="4"
-                        id="reason"
-                        onChange={this.inputting}
-                    />
-                    <label htmlFor="reason">Detail</label>
-                    <input
-                        type="radio"
-                        name="kind"
-                        value="5"
-                        id="reason"
-                        onChange={this.inputting}
-                    />
-                    <label htmlFor="reason">Perspective</label>
+                    <div className="horContainer">
+                        <input
+                            type="radio"
+                            name="kind"
+                            value="1"
+                            id="reason"
+                            onChange={this.inputting}
+                        />
+                        <label htmlFor="reason">Reason</label>
+                        <input
+                            type="radio"
+                            name="kind"
+                            value="2"
+                            id="effect"
+                            onChange={this.inputting}
+                        />
+                        <label htmlFor="effect">Effect</label>
+                        <input
+                            type="radio"
+                            name="kind"
+                            value="3"
+                            id="broad"
+                            onChange={this.inputting}
+                        />
+                        <label htmlFor="broad">Broad</label>
+                        <input
+                            type="radio"
+                            name="kind"
+                            value="4"
+                            id="detail"
+                            onChange={this.inputting}
+                        />
+                        <label htmlFor="detail">Detail</label>
+                        <input
+                            type="radio"
+                            name="kind"
+                            value="5"
+                            id="perspective"
+                            onChange={this.inputting}
+                        />
+                        <label htmlFor="perspective">Perspective</label>
+                    </div>
                     <button onClick={this.uploadLinks}>Save</button>
                 </form>
             </div>

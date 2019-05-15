@@ -38,7 +38,7 @@ class Article extends React.Component {
     }
     render() {
         return (
-            <div className="article">
+            <div className="article verContainer">
                 {this.state.currentArticle.publish ? (
                     <div>
                         <h1 className="articleTitle">

@@ -44,7 +44,7 @@ class Login extends React.Component {
                         Oooops, something broke, YOU BROKE ITTTT!!!
                     </div>
                 )}
-                <form>
+                <form className="verContainer">
                     <input
                         type="email"
                         name="email"

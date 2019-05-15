@@ -98,12 +98,12 @@ class Articlecms extends React.Component {
     }
     render() {
         return (
-            <div className="articlecms">
+            <div className="articlecms verContainer">
                 {this.props.user ? (
                     <div className="articleForm">
                         {this.props.user.status > 1 ? (
                             <div>
-                                <form>
+                                <form className="verContainer">
                                     <label htmlFor="title" className="inputTag">
                                         Title
                                     </label>
@@ -148,7 +148,7 @@ class Articlecms extends React.Component {
                                 </form>
                                 {this.props.user.status > 2 && (
                                     <div className="editorSecArt">
-                                        <form>
+                                        <form className="horContainer">
                                             <input
                                                 type="radio"
                                                 name="publish"

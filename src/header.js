@@ -27,23 +27,35 @@ class Header extends React.Component {
     logout() {
         axios.get("/logout").then(({ data }) => {
             this.props.dispatch(setUserData(data.user));
-            // location.replace("/");
+            location.replace("/");
         });
     }
     render() {
         return (
             <div className="header">
+                <div className="imageDiv">
+                    <Link to="/">
+                        <img src="/logo.png" />
+                    </Link>
+                </div>
                 {this.props.user ? (
-                    <div className="loggedInHeader">
+                    <div className="loggedIn">
                         {this.props.user.status > 1 && <Navcms />}
-                        <Link to="/profile">
-                            <img
-                                src={this.props.user.picture || "/default.png"}
-                            />
-                        </Link>
-                        <p className="linkify" onClick={this.logout}>
-                            Logout
-                        </p>
+                        <div className="userNav horContainer">
+                            <p className="linkify" onClick={this.logout}>
+                                Logout
+                            </p>
+                            <Link to="/self">
+                                <div className="imageDiv">
+                                    <img
+                                        src={
+                                            this.props.user.picture ||
+                                            "/default.png"
+                                        }
+                                    />
+                                </div>
+                            </Link>
+                        </div>
                     </div>
                 ) : (
                     <div onClick={this.toggleLogforms}>Log in!</div>

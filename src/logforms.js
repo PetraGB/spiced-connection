@@ -44,19 +44,27 @@ class Logforms extends React.Component {
     }
     render() {
         return (
-            <div className="logform">
-                <div onClick={this.props.toggleLogin}>X</div>
+            <div className="logform verContainer">
                 {this.state.loginVisible ? (
-                    <div>
+                    <div className="loginFormContainer verContainer">
+                        <div onClick={this.props.toggleLogin}>X</div>
                         <Login toggleLogin={this.props.toggleLogin} />
-                        <p>Don{"'"}t have an account yet?</p>
-                        <button onClick={this.toggleLogin}> Register!</button>
+                        <div className="verContainer">
+                            <p>Don{"'"}t have an account yet?</p>
+                            <button onClick={this.toggleLogin}>
+                                {" "}
+                                Register!
+                            </button>
+                        </div>
                     </div>
                 ) : (
-                    <div>
+                    <div className="loginFormContainer verContainer">
+                        <div onClick={this.props.toggleLogin}>X</div>
                         <Register toggleLogin={this.props.toggleLogin} />
-                        <p>Already have an account?</p>
-                        <button onClick={this.toggleLogin}> Log in!</button>
+                        <div className="verContainer">
+                            <p>Already have an account?</p>
+                            <button onClick={this.toggleLogin}> Log in!</button>
+                        </div>
                     </div>
                 )}
             </div>

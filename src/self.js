@@ -12,7 +12,7 @@ class Self extends React.Component {
     }
     render() {
         return (
-            <div className="profile">
+            <div className="profile verContainer">
                 {this.props.user ? (
                     <div className="profileComp">
                         <div className="profilePic">

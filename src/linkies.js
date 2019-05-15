@@ -22,13 +22,33 @@ class Linkies extends React.Component {
     }
     render() {
         return (
-            <div className="links">
+            <div className="links verContainer">
                 {this.state.links &&
                     this.state.links.map(link => {
                         return (
-                            <div className="links unite" key={link.id}>
+                            <div className="links unit" key={link.id}>
                                 <Link to={"/article/" + link.destination}>
-                                    {link.explanation}
+                                    <div className="links imagediv">
+                                        {link.kind == 1 && (
+                                            <img src="reason.png" />
+                                        )}
+                                        {link.kind == 2 && (
+                                            <img src="effect.png" />
+                                        )}
+                                        {link.kind == 3 && (
+                                            <img src="broad.png" />
+                                        )}
+                                        {link.kind == 4 && (
+                                            <img src="detail.png" />
+                                        )}
+                                        {link.kind == 5 && (
+                                            <img src="perspective.png" />
+                                        )}
+                                        {link.kind == 6 && (
+                                            <img src="perspective.png" />
+                                        )}
+                                    </div>
+                                    <p>{link.explanation}</p>
                                 </Link>
                             </div>
                         );

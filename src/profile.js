@@ -23,7 +23,7 @@ class Profile extends React.Component {
     }
     render() {
         return (
-            <div className="profile">
+            <div className="profile verContainer">
                 {this.state.profile ? (
                     <div className="nameAndPic">
                         <div className="profilePic">
