@@ -4,8 +4,6 @@ import axios from "./axios";
 import { connect } from "react-redux";
 // import { Link } from "react-router-dom";
 
-import Linkscms from "./linkscms";
-
 class Articlecms extends React.Component {
     constructor(props) {
         super(props);
@@ -106,26 +104,38 @@ class Articlecms extends React.Component {
                         {this.props.user.status > 1 ? (
                             <div>
                                 <form>
-                                    <p className="inputTag">Title</p>
+                                    <label htmlFor="title" className="inputTag">
+                                        Title
+                                    </label>
                                     <input
                                         type="text"
                                         name="title"
+                                        id="title"
                                         placeholder="Title"
                                         value={this.state.currentArticle.title}
                                         onChange={this.inputting}
                                     />
-                                    <p className="inputTag">Text</p>
+                                    <label htmlFor="text" className="inputTag">
+                                        Text
+                                    </label>
                                     <textarea
                                         name="article"
                                         type="text"
+                                        id="text"
                                         value={
                                             this.state.currentArticle.article
                                         }
                                         onChange={this.inputting}
                                     />
-                                    <p className="inputTag">Summary</p>
+                                    <label
+                                        htmlFor="summary"
+                                        className="inputTag"
+                                    >
+                                        Summary
+                                    </label>
                                     <textarea
                                         name="summary"
+                                        id="summary"
                                         type="text"
                                         value={
                                             this.state.currentArticle.summary
@@ -163,7 +173,6 @@ class Articlecms extends React.Component {
                                                 Update
                                             </button>
                                         </form>
-                                        <Linkscms />
                                     </div>
                                 )}
                             </div>

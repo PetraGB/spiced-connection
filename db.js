@@ -84,6 +84,20 @@ function updateRead(id, read) {
     return db.query(q, params);
 }
 
+function addLink(origin, destination, explanation, kind, editorid) {
+    const q =
+        "INSERT INTO links (origin, destination, explanation, kind, editorid) VALUES ($1, $2, $3, $4, $5) RETURNING id;";
+    const params = [origin, destination, explanation, kind, editorid];
+    return db.query(q, params);
+}
+
+function updateLink(origin, destination, explanation, kind, editorid, id) {
+    const q =
+        "UPDATE links SET origin = $1, destination = $2, explanation = $3, kind = $4, editorid = $5 WHERE id = $6;";
+    const params = [origin, destination, explanation, kind, editorid, id];
+    return db.query(q, params);
+}
+
 module.exports = {
     checkByEmail,
     addUser,
@@ -96,5 +110,7 @@ module.exports = {
     updateArticle,
     publishArticle,
     getArticle,
-    updateRead
+    updateRead,
+    addLink,
+    updateLink
 };
