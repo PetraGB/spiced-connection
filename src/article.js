@@ -16,7 +16,7 @@ class Article extends React.Component {
                 summary: "",
                 uploaded: "",
                 published: "",
-                public: false
+                publish: false
             }
         };
     }
@@ -39,7 +39,7 @@ class Article extends React.Component {
         console.log(this.state);
         return (
             <div className="article">
-                {this.state.currentArticle.public ? (
+                {this.state.currentArticle.publish ? (
                     <div>
                         <h1 className="articleTitle">
                             {this.state.currentArticle.title}

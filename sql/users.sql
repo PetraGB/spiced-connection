@@ -7,9 +7,8 @@ CREATE TABLE users(
     email VARCHAR(200) NOT NULL,
     password VARCHAR(300) NOT NULL,
     pictures TEXT [],
-    atpicture INTEGER,
+    atpicture text,
     bio VARCHAR(500),
     status INTEGER NOT NULL DEFAULT 1,
-    read INTEGER [],
-    atbook INTEGER
+    read INTEGER []
 );

@@ -4,6 +4,8 @@ import axios from "./axios";
 import { connect } from "react-redux";
 // import { Link } from "react-router-dom";
 
+import Linkscms from "./linkscms";
+
 class Articlecms extends React.Component {
     constructor(props) {
         super(props);
@@ -12,14 +14,17 @@ class Articlecms extends React.Component {
                 id: 0,
                 title: "",
                 article: "",
-                picture: "",
+                pictures: [],
                 summary: "",
                 uploaded: "",
-                published: ""
+                published: "",
+                publish: false
             }
         };
         this.inputting = this.inputting.bind(this);
         this.uploadArticle = this.uploadArticle.bind(this);
+        this.updatePublish = this.updatePublish.bind(this);
+        this.publish = this.publish.bind(this);
     }
     componentDidMount() {
         const id = this.props.match.params.id;
@@ -29,7 +34,6 @@ class Articlecms extends React.Component {
                 .then(({ data }) => {
                     const currentArticle = data.article;
                     this.setState({ currentArticle });
-                    console.log(this.state);
                 })
                 .catch(err => {
                     this.setState({ error: true });
@@ -59,14 +63,42 @@ class Articlecms extends React.Component {
             axios
                 .post("/api/article/adjust", this.state.currentArticle)
                 .then(({ data }) => {
-                    console.log("data in update", data);
                     location.replace("/cms/article/" + data.id);
                 })
                 .catch();
         }
     }
+    updatePublish(e) {
+        if (e.target.value == "publish") {
+            this.setState({
+                currentArticle: {
+                    ...this.state.currentArticle,
+                    publish: true
+                }
+            });
+        } else if (e.target.value == "unpublish") {
+            this.setState({
+                currentArticle: {
+                    ...this.state.currentArticle,
+                    publish: false
+                }
+            });
+        }
+    }
+    publish(e) {
+        e.preventDefault();
+        const request = {
+            publish: this.state.currentArticle.publish,
+            id: this.state.currentArticle.id
+        };
+        axios
+            .post("/api/article/publish", request)
+            .then(({ data }) => {
+                location.replace("/article/" + data.id);
+            })
+            .catch();
+    }
     render() {
-        console.log(this.state);
         return (
             <div className="articlecms">
                 {this.props.user ? (
@@ -104,6 +136,36 @@ class Articlecms extends React.Component {
                                         Upload
                                     </button>
                                 </form>
+                                {this.props.user.status > 2 && (
+                                    <div className="editorSecArt">
+                                        <form>
+                                            <input
+                                                type="radio"
+                                                name="publish"
+                                                value="publish"
+                                                id="publish"
+                                                onChange={this.updatePublish}
+                                            />
+                                            <label htmlFor="publish">
+                                                Publish
+                                            </label>
+                                            <input
+                                                type="radio"
+                                                name="publish"
+                                                value="unpublish"
+                                                id="unpublish"
+                                                onChange={this.updatePublish}
+                                            />
+                                            <label htmlFor="unpublish">
+                                                Unpublish
+                                            </label>
+                                            <button onClick={this.publish}>
+                                                Update
+                                            </button>
+                                        </form>
+                                        <Linkscms />
+                                    </div>
+                                )}
                             </div>
                         ) : (
                             <div>please log in as a journalist</div>

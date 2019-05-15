@@ -7,7 +7,7 @@ const db = spicedPg(
 
 function checkByEmail(email) {
     const q =
-        "SELECT id, first, last, pictures, atpicture, bio, status, read, atbook FROM users WHERE email = $1;";
+        "SELECT id, first, last, pictures, atpicture, bio, status, read FROM users WHERE email = $1;";
     const params = [email];
     return db.query(q, params);
 }
@@ -25,6 +25,13 @@ function addUser(first, last, email, password) {
     return db.query(q, params);
 }
 
+function addPictureUser(picture, atpicture, id) {
+    const q =
+        "UPDATE users SET pictures = array_append(pictures, $1), atpicture = $2 WHERE id = $3;";
+    const params = [picture, atpicture, id];
+    return db.query(q, params);
+}
+
 function getProfileById(id) {
     const q =
         "SELECT id, first, last, pictures, atpicture, bio, status FROM users WHERE id = $1";
@@ -32,32 +39,37 @@ function getProfileById(id) {
     return db.query(q, params);
 }
 
-function addArticle(title, article, pictures, atpicture, summary, writerid) {
+function addArticle(title, article, pictures, summary, writerid) {
     const q =
-        "INSERT INTO articles (title, article, pictures, atpicture, summary, writerid) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id";
-    const params = [title, article, pictures, atpicture, summary, writerid];
+        "INSERT INTO articles (title, article, pictures, summary, writerid) VALUES ($1, $2, $3, $4, $5) RETURNING id";
+    const params = [title, article, pictures, summary, writerid];
     return db.query(q, params);
 }
 
-function updateArticle(
-    id,
-    title,
-    article,
-    pictures,
-    atpicture,
-    summary,
-    writerid
-) {
+function addPictureArticle(picture, id) {
     const q =
-        "UPDATE articles SET title = $2, article = $3, pictures = $4, atpicture=$5, summary = $6, writerid = $7 WHERE id = $1";
-    const params = [id, title, article, pictures, atpicture, summary, writerid];
+        "UPDATE users SET pictures = array_append(pictures, $1) WHERE id = $2;";
+    const params = [picture, id];
     return db.query(q, params);
 }
 
-function publishArticle(id) {
+function setPicturesArticle(pictures, id) {
+    const q = "UPDATE users SET pictures = ARRAY $1 WHERE id = $2;";
+    const params = [pictures, id];
+    return db.query(q, params);
+}
+
+function updateArticle(id, title, article, pictures, summary, writerid) {
     const q =
-        "UPDATE articles SET published = CURRENT_TIMESTAMP, public = true WHERE id = $1;";
-    const params = [id];
+        "UPDATE articles SET title = $2, article = $3, pictures = $4, summary = $5, writerid = $6 WHERE id = $1";
+    const params = [id, title, article, pictures, summary, writerid];
+    return db.query(q, params);
+}
+
+function publishArticle(publish, id) {
+    const q =
+        "UPDATE articles SET published = CURRENT_TIMESTAMP, publish = $1 WHERE id = $2;";
+    const params = [publish, id];
     return db.query(q, params);
 }
 
@@ -75,9 +87,12 @@ function updateRead(id, read) {
 module.exports = {
     checkByEmail,
     addUser,
+    addPictureUser,
     getPass,
     getProfileById,
     addArticle,
+    addPictureArticle,
+    setPicturesArticle,
     updateArticle,
     publishArticle,
     getArticle,
