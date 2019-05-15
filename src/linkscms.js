@@ -24,14 +24,33 @@ class Linkscms extends React.Component {
     }
     uploadLinks(e) {
         e.preventDefault();
-        axios
-            .post("/api/link/add", this.state.currentLink)
-            .then(({ data }) => {})
-            .catch();
+        if (
+            !this.state.currentLink.origin ||
+            !this.state.currentLink.destination ||
+            !this.state.currentLink.explanation ||
+            !this.state.currentLink.reverseExplanation ||
+            !this.state.currentLink.kind
+        ) {
+            this.setState({
+                error: true
+            });
+        } else {
+            axios
+                .post("/api/link/add", this.state.currentLink)
+                .then(({ data }) => {
+                    console.log("data from ajax link", data);
+                    this.setState(data);
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.setState({ error: true });
+                });
+        }
     }
     render() {
         return (
             <div className="linkscms">
+                {this.state.error && <p>{"Something went wrong"}</p>}
                 <form>
                     <label htmlFor="origin" className="inputTag">
                         Origin
