@@ -11,7 +11,7 @@ class Self extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            readArticles: {}
+            readArticles: []
         };
         this.fetchReadArticles = this.fetchReadArticles.bind(this);
     }
@@ -22,13 +22,15 @@ class Self extends React.Component {
         axios
             .get("/api/self/read")
             .then(({ data }) => {
-                const newArticles = data.readArticles;
-                this.setState({
-                    readArticles: {
-                        ...this.state.readArticles,
-                        newArticles
-                    }
-                });
+                if (data.readArticles) {
+                    let newArticles = data.readArticles;
+                    this.setState({
+                        readArticles: [
+                            ...this.state.readArticles,
+                            ...newArticles
+                        ]
+                    });
+                }
             })
             .catch();
     }
@@ -48,31 +50,13 @@ class Self extends React.Component {
                         <p>{this.props.user.bio}</p>
                         {this.props.user.read && this.state.readArticles && (
                             <React.Fragment>
-                                {this.state.readArticles.filter(article => {
-                                    if (
-                                        !this.props.user.read.includes(
-                                            article.id
-                                        )
-                                    )
-                                        return (
-                                            <Articlelink
-                                                key={article.id}
-                                                article={article}
-                                            />
-                                        );
-                                })}
-                                {this.state.readArticles.filter(article => {
-                                    if (
-                                        this.props.user.read.includes(
-                                            article.id
-                                        )
-                                    )
-                                        return (
-                                            <Articlelink
-                                                key={article.id}
-                                                article={article}
-                                            />
-                                        );
+                                {this.state.readArticles.map(article => {
+                                    return (
+                                        <Articlelink
+                                            key={article.id}
+                                            article={article}
+                                        />
+                                    );
                                 })}
                             </React.Fragment>
                         )}

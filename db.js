@@ -78,6 +78,13 @@ function getArticle(id) {
     return db.query(q, [id]);
 }
 
+function getLinkArticle(id) {
+    const q =
+        "SELECT articles.id AS id, title, articles.pictures AS pictures, summary, writerid, published, first, last, atpicture FROM articles JOIN users ON articles.writerid = users.id WHERE articles.id = $1 ORDER BY id DESC LIMIT 20;";
+    const params = [id];
+    return db.query(q, params);
+}
+
 function getLatestArticles() {
     const q =
         "SELECT articles.id AS id, title, articles.pictures AS pictures, summary, writerid, published, first, last, atpicture FROM articles JOIN users ON articles.writerid = users.id WHERE publish = true ORDER BY id DESC LIMIT 20;";
@@ -128,6 +135,7 @@ module.exports = {
     updateArticle,
     publishArticle,
     getArticle,
+    getLinkArticle,
     getLatestArticles,
     addToRead,
     updateRead,

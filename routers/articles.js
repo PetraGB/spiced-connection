@@ -65,12 +65,14 @@ app.post("/api/article/publish", requireEditor, (req, res) => {
         });
 });
 
-app.get("/api/article/:id", async (req, res) => {
-    db.getArticle(req.params.id)
-        .then(({ rows }) => {
+app.get("/api/article/:id", (req, res) => {
+    const id = Number(req.params.id);
+    db.getArticle(id)
+        .then(async ({ rows }) => {
             let article = rows[0];
-            if (article.publish || req.session.user.status > 1) {
-                // add article id to read array from user here!
+            let readId = null;
+
+            if (article && (article.publish || req.session.user.status > 1)) {
                 const datePublished = new Date(article.published);
                 article = {
                     ...article,
@@ -78,32 +80,39 @@ app.get("/api/article/:id", async (req, res) => {
                 };
                 if (req.session.user.status) {
                     if (!req.session.user.read) {
-                        db.addToRead(req.session.user.id, req.params.id)
+                        await db
+                            .addToRead(req.session.user.id, id)
                             .then(() => {
-                                let readId = req.params.id;
-                                req.session.user.read.push(req.params.id);
-                                res.json({ article, readId });
+                                console.log("if no read available running");
+                                readId = id;
+                                req.session.user.read = [id];
                             })
                             .catch(err => {
                                 console.log(err);
                             });
-                    } else if (!req.session.user.read.includes(req.params.id)) {
-                        db.addToRead(req.session.user.id, req.params.id)
+                    } else if (!req.session.user.read.includes(id)) {
+                        console.log(req.session.user.read);
+                        await db
+                            .addToRead(req.session.user.id, id)
                             .then(() => {
-                                let readId = req.params.id;
-                                req.session.user.read.push(req.params.id);
-                                res.json({ article, readId });
+                                console.log("if no include running");
+                                readId = id;
+                                req.session.user.read = [
+                                    ...req.session.user.read,
+                                    id
+                                ];
+                                console.log(
+                                    "read in session",
+                                    req.session.user.read
+                                );
                             })
                             .catch(err => {
                                 console.log(err);
                             });
                     }
-                } else {
-                    res.json({ article });
                 }
-            } else {
-                res.json({ error: true });
             }
+            res.json({ article, readId });
         })
         .catch(err => {
             console.log(err);
@@ -126,15 +135,20 @@ app.get("/api/latest", (req, res) => {
 app.get("/api/self/read", requireUser, async (req, res) => {
     const readArticlesList = req.session.user.read;
     let readArticles = [];
-    for (var i = 0; i < readArticlesList.length; i++) {
-        await db
-            .getLinkArticle(readArticlesList[i])
-            .then(({ rows }) => {
-                readArticles.push(rows[0]);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+
+    if (readArticlesList) {
+        for (var i = 0; i < readArticlesList.length; i++) {
+            await db
+                .getLinkArticle(readArticlesList[i])
+                .then(({ rows }) => {
+                    readArticles.push(rows[0]);
+                })
+                .catch(err => {
+                    res.json({ error: true });
+                    console.log(err);
+                });
+        }
     }
+
     res.json({ readArticles });
 });

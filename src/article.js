@@ -29,6 +29,7 @@ class Article extends React.Component {
         axios
             .get("/api/article/" + id)
             .then(({ data }) => {
+                console.log("data from axios", data);
                 const currentArticle = data.article;
                 this.setState({ currentArticle });
                 if (data.readId) {
@@ -42,9 +43,10 @@ class Article extends React.Component {
             });
     }
     render() {
+        console.log(this.props);
         return (
             <div className="article verContainer">
-                {this.state.currentArticle.publish ? (
+                {this.state.currentArticle ? (
                     <div>
                         <h1 className="articleTitle">
                             {this.state.currentArticle.title}
