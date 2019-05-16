@@ -47,7 +47,7 @@ class Article extends React.Component {
         return (
             <div className="article verContainer">
                 {this.state.currentArticle ? (
-                    <div>
+                    <React.Fragment>
                         <h1 className="articleTitle">
                             {this.state.currentArticle.title}
                         </h1>
@@ -57,11 +57,11 @@ class Article extends React.Component {
                         <div className="articleText">
                             {this.state.currentArticle.article}
                         </div>
-                    </div>
+                        <Linkies articleid={this.props.match.params.id} />
+                    </React.Fragment>
                 ) : (
                     <div>There is no such article</div>
                 )}
-                <Linkies articleid={this.props.match.params.id} />
             </div>
         );
     }

@@ -111,8 +111,10 @@ app.get("/api/article/:id", (req, res) => {
                             });
                     }
                 }
+                res.json({ article, readId });
+            } else {
+                res.json({ error: true });
             }
-            res.json({ article, readId });
         })
         .catch(err => {
             console.log(err);

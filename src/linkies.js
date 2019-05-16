@@ -4,6 +4,8 @@ import axios from "./axios";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import Connection from "./connection";
+
 class Linkies extends React.Component {
     constructor(props) {
         super(props);
@@ -23,31 +25,16 @@ class Linkies extends React.Component {
     render() {
         return (
             <div className="links verContainer">
+                <h2>Related articles</h2>
                 {this.state.links &&
                     this.state.links.map(link => {
                         return (
                             <div className="links unit" key={link.id}>
                                 <Link to={"/article/" + link.destination}>
-                                    <div className="links imagediv">
-                                        {link.kind == 1 && (
-                                            <img src="reason.png" />
-                                        )}
-                                        {link.kind == 2 && (
-                                            <img src="effect.png" />
-                                        )}
-                                        {link.kind == 3 && (
-                                            <img src="broad.png" />
-                                        )}
-                                        {link.kind == 4 && (
-                                            <img src="detail.png" />
-                                        )}
-                                        {link.kind == 5 && (
-                                            <img src="perspective.png" />
-                                        )}
-                                        {link.kind == 6 && (
-                                            <img src="perspective.png" />
-                                        )}
-                                    </div>
+                                    {link.kind && (
+                                        <Connection kind={link.kind} />
+                                    )}
+
                                     <p>{link.explanation}</p>
                                 </Link>
                             </div>
