@@ -4,3 +4,10 @@ export function setUserData(user) {
         user
     };
 }
+
+export function setNewRead(readId) {
+    return {
+        type: "ADD_TO_READ",
+        readId
+    };
+}

@@ -65,7 +65,7 @@ app.post("/api/article/publish", requireEditor, (req, res) => {
         });
 });
 
-app.get("/api/article/:id", (req, res) => {
+app.get("/api/article/:id", async (req, res) => {
     db.getArticle(req.params.id)
         .then(({ rows }) => {
             let article = rows[0];
@@ -76,7 +76,31 @@ app.get("/api/article/:id", (req, res) => {
                     ...article,
                     published: datePublished.toGMTString()
                 };
-                res.json({ article });
+                if (req.session.user.status) {
+                    if (!req.session.user.read) {
+                        db.addToRead(req.session.user.id, req.params.id)
+                            .then(() => {
+                                let readId = req.params.id;
+                                req.session.user.read.push(req.params.id);
+                                res.json({ article, readId });
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            });
+                    } else if (!req.session.user.read.includes(req.params.id)) {
+                        db.addToRead(req.session.user.id, req.params.id)
+                            .then(() => {
+                                let readId = req.params.id;
+                                req.session.user.read.push(req.params.id);
+                                res.json({ article, readId });
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            });
+                    }
+                } else {
+                    res.json({ article });
+                }
             } else {
                 res.json({ error: true });
             }
@@ -97,4 +121,20 @@ app.get("/api/latest", (req, res) => {
             console.log(err);
             res.json({ error: true });
         });
+});
+
+app.get("/api/self/read", requireUser, async (req, res) => {
+    const readArticlesList = req.session.user.read;
+    let readArticles = [];
+    for (var i = 0; i < readArticlesList.length; i++) {
+        await db
+            .getLinkArticle(readArticlesList[i])
+            .then(({ rows }) => {
+                readArticles.push(rows[0]);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+    res.json({ readArticles });
 });

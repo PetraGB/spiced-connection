@@ -22,38 +22,49 @@ class Home extends React.Component {
     }
     render() {
         console.log(this.props);
+        console.log(this.state.latest);
         return (
             <div className="home verContainer">
                 {this.state.latest && this.props.user && (
                     <React.Fragment>
                         {this.props.user.read ? (
                             <React.Fragment>
-                                {this.state.latest.filter(article => {
-                                    if (
-                                        !this.props.user.read.includes(
-                                            article.id
-                                        )
-                                    )
+                                {this.state.latest
+                                    .filter(article => {
+                                        if (
+                                            !this.props.user.read.includes(
+                                                article.id
+                                            )
+                                        ) {
+                                            return true;
+                                        }
+                                    })
+                                    .map(article => {
                                         return (
                                             <Articlelink
                                                 key={article.id}
                                                 article={article}
                                             />
                                         );
-                                })}
-                                {this.state.latest.filter(article => {
-                                    if (
-                                        this.props.user.read.includes(
-                                            article.id
-                                        )
-                                    )
+                                    })}
+                                {this.state.latest
+                                    .filter(article => {
+                                        if (
+                                            this.props.user.read.includes(
+                                                article.id
+                                            )
+                                        ) {
+                                            return true;
+                                        }
+                                    })
+                                    .map(article => {
                                         return (
                                             <Articlelink
                                                 key={article.id}
                                                 article={article}
                                             />
                                         );
-                                })}
+                                    })}
                             </React.Fragment>
                         ) : (
                             <React.Fragment>

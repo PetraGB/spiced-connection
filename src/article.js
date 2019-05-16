@@ -3,6 +3,7 @@ import axios from "./axios";
 
 import { connect } from "react-redux";
 // import { Link } from "react-router-dom";
+import { setNewRead } from "./actions";
 
 import Linkies from "./linkies";
 
@@ -30,6 +31,10 @@ class Article extends React.Component {
             .then(({ data }) => {
                 const currentArticle = data.article;
                 this.setState({ currentArticle });
+                if (data.readId) {
+                    console.log(data.readId);
+                    this.props.dispatch(setNewRead(data.readId));
+                }
             })
             .catch(err => {
                 this.setState({ error: true });

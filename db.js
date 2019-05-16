@@ -84,6 +84,12 @@ function getLatestArticles() {
     return db.query(q);
 }
 
+function addToRead(id, readid) {
+    const q = "UPDATE users SET read = array_append(read, $2) WHERE id = $1;";
+    const params = [id, readid];
+    return db.query(q, params);
+}
+
 function updateRead(id, read) {
     const q = "UPDATE users SET read = $2 WHERE id = $1;";
     const params = [id, read];
@@ -123,6 +129,7 @@ module.exports = {
     publishArticle,
     getArticle,
     getLatestArticles,
+    addToRead,
     updateRead,
     addLink,
     updateLink,
