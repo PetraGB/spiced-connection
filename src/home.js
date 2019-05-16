@@ -4,6 +4,8 @@ import axios from "./axios";
 import { connect } from "react-redux";
 // import { Link } from "react-router-dom";
 
+import Articlelink from "./articlelink";
+
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -23,9 +25,9 @@ class Home extends React.Component {
         return (
             <div className="home verContainer">
                 {this.state.latest && this.props.user && (
-                    <div>
+                    <React.Fragment>
                         {this.props.user.read ? (
-                            <div>
+                            <React.Fragment>
                                 {this.state.latest.filter(article => {
                                     if (
                                         !this.props.user.read.includes(
@@ -33,20 +35,10 @@ class Home extends React.Component {
                                         )
                                     )
                                         return (
-                                            <div
-                                                className="link new horContainer"
+                                            <Articlelink
                                                 key={article.id}
-                                            >
-                                                <div>
-                                                    <img
-                                                        src={
-                                                            article.pictures[0]
-                                                        }
-                                                    />
-                                                </div>
-                                                <h2>{article.title}</h2>
-                                                <p>{article.summary}</p>
-                                            </div>
+                                                article={article}
+                                            />
                                         );
                                 })}
                                 {this.state.latest.filter(article => {
@@ -56,62 +48,39 @@ class Home extends React.Component {
                                         )
                                     )
                                         return (
-                                            <div
-                                                className="link read horContainer"
+                                            <Articlelink
                                                 key={article.id}
-                                            >
-                                                <div>
-                                                    <img
-                                                        src={
-                                                            article.pictures[0]
-                                                        }
-                                                    />
-                                                </div>
-                                                <h2>{article.title}</h2>
-                                                <p>{article.summary}</p>
-                                            </div>
+                                                article={article}
+                                            />
                                         );
                                 })}
-                            </div>
+                            </React.Fragment>
                         ) : (
-                            <div>
+                            <React.Fragment>
                                 {this.state.latest.map(article => {
                                     return (
-                                        <div
-                                            className="link new horContainer"
+                                        <Articlelink
                                             key={article.id}
-                                        >
-                                            <div>
-                                                <img
-                                                    src={article.pictures[0]}
-                                                />
-                                            </div>
-                                            <h2>{article.title}</h2>
-                                            <p>{article.summary}</p>
-                                        </div>
+                                            article={article}
+                                        />
                                     );
                                 })}
-                            </div>
+                            </React.Fragment>
                         )}
-                    </div>
+                    </React.Fragment>
                 )}
+
                 {!this.props.user && this.state.latest && (
-                    <div>
+                    <React.Fragment>
                         {this.state.latest.map(article => {
                             return (
-                                <div
-                                    className="link new horContainer"
+                                <Articlelink
                                     key={article.id}
-                                >
-                                    <div>
-                                        <img src={article.pictures[0]} />
-                                    </div>
-                                    <h2>{article.title}</h2>
-                                    <p>{article.summary}</p>
-                                </div>
+                                    article={article}
+                                />
                             );
                         })}
-                    </div>
+                    </React.Fragment>
                 )}
             </div>
         );
