@@ -70,6 +70,7 @@ app.get("/api/article/:id", (req, res) => {
         .then(({ rows }) => {
             let article = rows[0];
             if (article.publish || req.session.user.status > 1) {
+                // add article id to read array from user here!
                 const datePublished = new Date(article.published);
                 article = {
                     ...article,
@@ -80,5 +81,20 @@ app.get("/api/article/:id", (req, res) => {
                 res.json({ error: true });
             }
         })
-        .catch();
+        .catch(err => {
+            console.log(err);
+            res.json({ error: true });
+        });
+});
+
+app.get("/api/latest", (req, res) => {
+    db.getLatestArticles()
+        .then(({ rows }) => {
+            const latest = rows;
+            res.json({ latest });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({ error: true });
+        });
 });

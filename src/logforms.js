@@ -47,7 +47,9 @@ class Logforms extends React.Component {
             <div className="logform verContainer">
                 {this.state.loginVisible ? (
                     <div className="loginFormContainer verContainer">
-                        <div onClick={this.props.toggleLogin}>X</div>
+                        <div className="x" onClick={this.props.toggleLogin}>
+                            X
+                        </div>
                         <Login toggleLogin={this.props.toggleLogin} />
                         <div className="verContainer">
                             <p>Don{"'"}t have an account yet?</p>
@@ -59,7 +61,9 @@ class Logforms extends React.Component {
                     </div>
                 ) : (
                     <div className="loginFormContainer verContainer">
-                        <div onClick={this.props.toggleLogin}>X</div>
+                        <div className="x" onClick={this.props.toggleLogin}>
+                            X
+                        </div>
                         <Register toggleLogin={this.props.toggleLogin} />
                         <div className="verContainer">
                             <p>Already have an account?</p>

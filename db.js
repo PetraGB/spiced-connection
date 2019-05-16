@@ -78,6 +78,12 @@ function getArticle(id) {
     return db.query(q, [id]);
 }
 
+function getLatestArticles() {
+    const q =
+        "SELECT articles.id AS id, title, articles.pictures AS pictures, summary, writerid, published, first, last, atpicture FROM articles JOIN users ON articles.writerid = users.id WHERE publish = true ORDER BY id DESC LIMIT 20;";
+    return db.query(q);
+}
+
 function updateRead(id, read) {
     const q = "UPDATE users SET read = $2 WHERE id = $1;";
     const params = [id, read];
@@ -116,6 +122,7 @@ module.exports = {
     updateArticle,
     publishArticle,
     getArticle,
+    getLatestArticles,
     updateRead,
     addLink,
     updateLink,
