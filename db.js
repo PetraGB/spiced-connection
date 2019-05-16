@@ -74,7 +74,8 @@ function publishArticle(publish, id) {
 }
 
 function getArticle(id) {
-    const q = "SELECT * FROM articles WHERE id = $1";
+    const q =
+        "SELECT articles.id AS id, title, article, articles.pictures AS pictures, summary, writerid, uploaded, published, publish, first, last, atpicture FROM articles JOIN users ON writerid = users.id WHERE articles.id = $1";
     return db.query(q, [id]);
 }
 
@@ -118,7 +119,8 @@ function updateLink(origin, destination, explanation, kind, editorid, id) {
 }
 
 function getLinksByOrigin(origin) {
-    const q = "SELECT * FROM links WHERE origin = $1";
+    const q =
+        "SELECT links.id AS id, origin, destination, explanation, kind, editorid, first, last FROM links JOIN users ON editorid = users.id WHERE origin = $1";
     const params = [origin];
     return db.query(q, params);
 }
