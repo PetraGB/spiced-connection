@@ -125,7 +125,14 @@ app.get("/api/article/:id", (req, res) => {
 app.get("/api/latest", (req, res) => {
     db.getLatestArticles()
         .then(({ rows }) => {
-            const latest = rows;
+            let latest = rows;
+            latest = latest.map(article => {
+                const datePublished = new Date(article.published);
+                return (article = {
+                    ...article,
+                    published: datePublished.toGMTString()
+                });
+            });
             res.json({ latest });
         })
         .catch(err => {

@@ -18,9 +18,8 @@ class Uploaderuser extends React.Component {
             .post("/api/self/uploadpic", formData)
             .then(({ data }) => {
                 if (!data.error) {
-                    console.log(data);
                     this.props.dispatch(updateUserPics(data));
-                    console.log(this.props.user);
+                    this.props.toggleUploader();
                 }
             })
             .catch(err => {

@@ -29,7 +29,8 @@ class Profile extends React.Component {
                         <div className="profilePic">
                             <img
                                 src={
-                                    this.state.profile.picture || "/default.png"
+                                    this.state.profile.atpicture ||
+                                    "/default.png"
                                 }
                             />
                         </div>

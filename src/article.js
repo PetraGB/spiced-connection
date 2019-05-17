@@ -2,7 +2,7 @@ import React from "react";
 import axios from "./axios";
 
 import { connect } from "react-redux";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { setNewRead } from "./actions";
 
 import Linkies from "./linkies";
@@ -51,6 +51,32 @@ class Article extends React.Component {
                         <h1 className="articleTitle">
                             {this.state.currentArticle.title}
                         </h1>
+                        {this.state.currentArticle.pictures && (
+                            <div className="articleImg">
+                                <img
+                                    src={this.state.currentArticle.pictures[0]}
+                                />
+                            </div>
+                        )}
+                        <Link
+                            to={
+                                "/profile/" + this.state.currentArticle.writerid
+                            }
+                            className="writerDetails horContainer"
+                        >
+                            <div className="imageDiv">
+                                <img
+                                    src={
+                                        this.state.currentArticle.atpicture ||
+                                        "/default.png"
+                                    }
+                                />
+                            </div>
+                            <h4>
+                                {this.state.currentArticle.first}{" "}
+                                {this.state.currentArticle.last}
+                            </h4>
+                        </Link>
                         <p className="articlePublished">
                             {this.state.currentArticle.published}
                         </p>

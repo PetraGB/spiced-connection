@@ -11,8 +11,8 @@ const {
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
-// const s3 = require("../s3");
-// const config = require("../config");
+const s3 = require("../s3");
+const config = require("../config");
 
 const multer = require("multer");
 const uidSafe = require("uid-safe");
@@ -41,13 +41,9 @@ app.post(
     "/api/self/uploadpic",
     requireUser,
     uploader.single("file"),
+    s3.upload,
     (req, res) => {
-        const pictureUrl = path.join(
-            __dirname,
-            "..",
-            "/uploads/",
-            req.file.filename
-        );
+        const pictureUrl = config.s3Url + req.file.filename;
         db.addPictureUser(req.session.user.id, pictureUrl)
             .then(({ rows }) => {
                 req.session.user.atpicture = rows[0].atpicture;
@@ -64,8 +60,9 @@ app.post(
     "/api/article/uploadpic",
     requireUser,
     uploader.single("file"),
+    s3.upload,
     (req, res) => {
-        const pictureUrl = "./uploads/" + req.file.filename;
+        const pictureUrl = config.s3Url + req.file.filename;
 
         db.addPictureArticle(req.body.id, pictureUrl)
             .then(({ rows }) => {

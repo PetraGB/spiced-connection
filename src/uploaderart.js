@@ -16,8 +16,8 @@ export default class Uploaderart extends React.Component {
             .post("/api/article/uploadpic", formData)
             .then(({ data }) => {
                 if (!data.error) {
-                    console.log(data);
                     this.props.updateArticlePics(data.pictures);
+                    this.props.toggleUploader();
                 }
             })
             .catch(err => {

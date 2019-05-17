@@ -125,10 +125,18 @@ class Linkscms extends React.Component {
                             type="radio"
                             name="kind"
                             value="5"
-                            id="perspective"
+                            id="similar"
                             onChange={this.inputting}
                         />
-                        <label htmlFor="perspective">Perspective</label>
+                        <label htmlFor="similar">Similar</label>
+                        <input
+                            type="radio"
+                            name="kind"
+                            value="6"
+                            id="opposite"
+                            onChange={this.inputting}
+                        />
+                        <label htmlFor="opposite">Opposite</label>
                     </div>
                     <button onClick={this.uploadLinks}>Save</button>
                 </form>

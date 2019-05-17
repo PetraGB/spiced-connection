@@ -15,9 +15,8 @@ export default class Connection extends React.Component {
                 {this.props.kind == 2 && <p>Effect</p>}
                 {this.props.kind == 3 && <p>Broad</p>}
                 {this.props.kind == 4 && <p>Detail</p>}
-                {(this.props.kind == 5 || this.props.kind == 6) && (
-                    <p>Perspective</p>
-                )}
+                {this.props.kind == 5 && <p>Similar</p>}
+                {this.props.kind == 6 && <p>Opposite</p>}
             </div>
         );
     }

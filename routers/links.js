@@ -39,10 +39,10 @@ app.post("/api/link/add", requireEditor, async (req, res) => {
         reverseKind = 3;
     } else if (req.body.kind == 5) {
         kind = 5;
-        reverseKind = 6;
+        reverseKind = 5;
     } else if (req.body.kind == 6) {
         kind = 6;
-        reverseKind = 5;
+        reverseKind = 6;
     }
 
     const a = {
