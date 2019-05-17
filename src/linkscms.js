@@ -88,7 +88,7 @@ class Linkscms extends React.Component {
                         id="reverseExplanation"
                         onChange={this.inputting}
                     />
-                    <div className="horContainer">
+                    <div className="optionsLinks horContainer">
                         <input
                             type="radio"
                             name="kind"

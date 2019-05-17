@@ -18,7 +18,7 @@ class Articlelink extends React.Component {
                 <div className="imageDiv">
                     <img src={this.props.article.pictures[0]} />
                 </div>
-                <div>
+                <div className="linkText">
                     <h2>{this.props.article.title}</h2>
                     <p className="date">{this.props.article.published}</p>
                     <p>{this.props.article.summary}</p>

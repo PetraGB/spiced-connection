@@ -120,7 +120,7 @@ function updateLink(origin, destination, explanation, kind, editorid, id) {
 
 function getLinksByOrigin(origin) {
     const q =
-        "SELECT links.id AS id, origin, destination, explanation, kind, editorid, first, last FROM links JOIN users ON editorid = users.id WHERE origin = $1";
+        "SELECT links.id AS id, origin, destination, explanation, kind, title, published FROM links JOIN articles ON origin = articles.id WHERE origin = $1";
     const params = [origin];
     return db.query(q, params);
 }

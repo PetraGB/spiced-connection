@@ -34,6 +34,14 @@ a,
     text-decoration: none;
 }
 
+button {
+    background-color: #146d45;
+    border: 1px solid #16253a;
+    margin: 5px;
+    font-size: 14px;
+    padding: 8px;
+}
+
 .horContainer {
     display: flex;
     align-items: center;
@@ -102,4 +110,73 @@ a,
 
 .userNav {
     grid-column-end: 3;
+}
+
+.link {
+    width: 80%;
+    margin: 10px;
+    border: 1px solid #967aa1;
+    background-color: #c5b6cb;
+}
+
+.link .imageDiv {
+    width: 40%;
+    min-width: 250px;
+    margin: 10px;
+}
+
+.linkText {
+    width: 50%;
+    min-width: 250px;
+}
+
+.article {
+    width: 80%;
+}
+
+.connection {
+    width: 150px;
+    height: 150px;
+    margin-top: 5px;
+    border: 1px solid #967aa1;
+}
+
+.origin,
+.destination {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.origin {
+    background-color: #146d45;
+    position: relative;
+    top: 5px;
+    left: 5px;
+}
+
+.destination {
+    background-color: #9f4b3b;
+    position: relative;
+    top: 15px;
+    left: 80px;
+}
+
+.articleForm {
+    width: 90%;
+}
+
+.articleForm textarea,
+.linkscms textarea {
+    width: 70%;
+    height: 200px;
+}
+
+.editorSecArt {
+    margin: 20px;
+    margin-top: solid 1px #9f4b3b;
+}
+
+.optionsLinks {
+    margin: 15px;
 }

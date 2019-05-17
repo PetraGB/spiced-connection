@@ -48,7 +48,7 @@ class Self extends React.Component {
         return (
             <div className="profile verContainer">
                 {this.props.user ? (
-                    <div className="profileComp">
+                    <div className="nameAndPic">
                         <div
                             onClick={this.toggleUploader}
                             className="profilePic"

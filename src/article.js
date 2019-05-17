@@ -45,9 +45,9 @@ class Article extends React.Component {
     render() {
         console.log(this.props);
         return (
-            <div className="article verContainer">
+            <div className="articleMaster verContainer">
                 {this.state.currentArticle ? (
-                    <React.Fragment>
+                    <div className="article verContainer">
                         <h1 className="articleTitle">
                             {this.state.currentArticle.title}
                         </h1>
@@ -84,7 +84,7 @@ class Article extends React.Component {
                             {this.state.currentArticle.article}
                         </div>
                         <Linkies articleid={this.props.match.params.id} />
-                    </React.Fragment>
+                    </div>
                 ) : (
                     <div>There is no such article</div>
                 )}

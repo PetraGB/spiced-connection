@@ -30,12 +30,18 @@ class Linkies extends React.Component {
                     <React.Fragment>
                         {this.state.links.map(link => {
                             return (
-                                <div className="links unit" key={link.id}>
-                                    <Link to={"/article/" + link.destination}>
+                                <div className="link unit" key={link.id}>
+                                    <Link
+                                        to={"/article/" + link.destination}
+                                        className="horContainer"
+                                    >
                                         {link.kind && (
                                             <Connection kind={link.kind} />
                                         )}
-                                        <p>{link.explanation}</p>
+                                        <div>
+                                            <h2>{link.title}</h2>
+                                            <p>{link.explanation}</p>
+                                        </div>
                                     </Link>
                                 </div>
                             );
@@ -58,7 +64,7 @@ class Linkies extends React.Component {
                                 .map(link => {
                                     return (
                                         <div
-                                            className="links unit unread"
+                                            className="link unit unread"
                                             key={link.id}
                                         >
                                             <Link
@@ -66,13 +72,17 @@ class Linkies extends React.Component {
                                                     "/article/" +
                                                     link.destination
                                                 }
+                                                className="horContainer"
                                             >
                                                 {link.kind && (
                                                     <Connection
                                                         kind={link.kind}
                                                     />
                                                 )}
-                                                <p>{link.explanation}</p>
+                                                <div>
+                                                    <h2>{link.title}</h2>
+                                                    <p>{link.explanation}</p>
+                                                </div>
                                             </Link>
                                         </div>
                                     );
@@ -91,7 +101,7 @@ class Linkies extends React.Component {
                                 .map(link => {
                                     return (
                                         <div
-                                            className="links unit read"
+                                            className="link unit read"
                                             key={link.id}
                                         >
                                             <Link
@@ -99,13 +109,17 @@ class Linkies extends React.Component {
                                                     "/article/" +
                                                     link.destination
                                                 }
+                                                className="horContainer"
                                             >
                                                 {link.kind && (
                                                     <Connection
                                                         kind={link.kind}
                                                     />
                                                 )}
-                                                <p>{link.explanation}</p>
+                                                <div>
+                                                    <h2>{link.title}</h2>
+                                                    <p>{link.explanation}</p>
+                                                </div>
                                             </Link>
                                         </div>
                                     );
@@ -114,16 +128,20 @@ class Linkies extends React.Component {
                             this.state.links.map(link => {
                                 return (
                                     <div
-                                        className="links unit read"
+                                        className="link unit read"
                                         key={link.id}
                                     >
                                         <Link
                                             to={"/article/" + link.destination}
+                                            className="horContainer"
                                         >
                                             {link.kind && (
                                                 <Connection kind={link.kind} />
                                             )}
-                                            <p>{link.explanation}</p>
+                                            <div>
+                                                <h2>{link.title}</h2>
+                                                <p>{link.explanation}</p>
+                                            </div>
                                         </Link>
                                     </div>
                                 );

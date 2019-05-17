@@ -11,6 +11,7 @@ export default class Connection extends React.Component {
             <div className="connection">
                 <div className={this.props.kind + " origin"} />
                 <div className={this.props.kind + " destination"} />
+                <div className={this.props.kind + " connectPath"} />
                 {this.props.kind == 1 && <p>Reason</p>}
                 {this.props.kind == 2 && <p>Effect</p>}
                 {this.props.kind == 3 && <p>Broad</p>}

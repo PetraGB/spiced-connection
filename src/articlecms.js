@@ -187,8 +187,8 @@ class Articlecms extends React.Component {
                                 )}
 
                                 {this.props.user.status > 2 && (
-                                    <div className="editorSecArt">
-                                        <form className="horContainer">
+                                    <div className="editorSecArt verContainer">
+                                        <form className="verContainer">
                                             <input
                                                 type="radio"
                                                 name="publish"

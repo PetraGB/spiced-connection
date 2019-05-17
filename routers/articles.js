@@ -150,7 +150,14 @@ app.get("/api/self/read", requireUser, async (req, res) => {
             await db
                 .getLinkArticle(readArticlesList[i])
                 .then(({ rows }) => {
-                    readArticles.push(rows[0]);
+                    let article = rows[0];
+                    const datePublished = new Date(article.published);
+                    article = {
+                        ...article,
+                        published: datePublished.toGMTString()
+                    };
+
+                    readArticles.push(article);
                 })
                 .catch(err => {
                     res.json({ error: true });
