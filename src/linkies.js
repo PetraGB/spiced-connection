@@ -26,20 +26,110 @@ class Linkies extends React.Component {
         return (
             <div className="links verContainer">
                 <h2>Related articles</h2>
-                {this.state.links &&
-                    this.state.links.map(link => {
-                        return (
-                            <div className="links unit" key={link.id}>
-                                <Link to={"/article/" + link.destination}>
-                                    {link.kind && (
-                                        <Connection kind={link.kind} />
-                                    )}
-
-                                    <p>{link.explanation}</p>
-                                </Link>
-                            </div>
-                        );
-                    })}
+                {this.state.links && !this.props.user && (
+                    <React.Fragment>
+                        {this.state.links.map(link => {
+                            return (
+                                <div className="links unit" key={link.id}>
+                                    <Link to={"/article/" + link.destination}>
+                                        {link.kind && (
+                                            <Connection kind={link.kind} />
+                                        )}
+                                        <p>{link.explanation}</p>
+                                    </Link>
+                                </div>
+                            );
+                        })}
+                    </React.Fragment>
+                )}
+                {this.state.links && this.props.user && (
+                    <React.Fragment>
+                        {this.props.user.read &&
+                            this.state.links
+                                .filter(link => {
+                                    if (
+                                        !this.props.user.read.includes(
+                                            link.destination
+                                        )
+                                    ) {
+                                        return true;
+                                    }
+                                })
+                                .map(link => {
+                                    return (
+                                        <div
+                                            className="links unit unread"
+                                            key={link.id}
+                                        >
+                                            <Link
+                                                to={
+                                                    "/article/" +
+                                                    link.destination
+                                                }
+                                            >
+                                                {link.kind && (
+                                                    <Connection
+                                                        kind={link.kind}
+                                                    />
+                                                )}
+                                                <p>{link.explanation}</p>
+                                            </Link>
+                                        </div>
+                                    );
+                                })}
+                        {this.props.user.read &&
+                            this.state.links
+                                .filter(link => {
+                                    if (
+                                        this.props.user.read.includes(
+                                            link.destination
+                                        )
+                                    ) {
+                                        return true;
+                                    }
+                                })
+                                .map(link => {
+                                    return (
+                                        <div
+                                            className="links unit read"
+                                            key={link.id}
+                                        >
+                                            <Link
+                                                to={
+                                                    "/article/" +
+                                                    link.destination
+                                                }
+                                            >
+                                                {link.kind && (
+                                                    <Connection
+                                                        kind={link.kind}
+                                                    />
+                                                )}
+                                                <p>{link.explanation}</p>
+                                            </Link>
+                                        </div>
+                                    );
+                                })}
+                        {!this.props.user.read &&
+                            this.state.links.map(link => {
+                                return (
+                                    <div
+                                        className="links unit read"
+                                        key={link.id}
+                                    >
+                                        <Link
+                                            to={"/article/" + link.destination}
+                                        >
+                                            {link.kind && (
+                                                <Connection kind={link.kind} />
+                                            )}
+                                            <p>{link.explanation}</p>
+                                        </Link>
+                                    </div>
+                                );
+                            })}
+                    </React.Fragment>
+                )}
             </div>
         );
     }

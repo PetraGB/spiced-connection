@@ -78,7 +78,7 @@ app.get("/api/article/:id", (req, res) => {
                     ...article,
                     published: datePublished.toGMTString()
                 };
-                if (req.session.user.status) {
+                if (req.session.user) {
                     if (!req.session.user.read) {
                         await db
                             .addToRead(req.session.user.id, id)

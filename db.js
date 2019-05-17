@@ -27,7 +27,7 @@ function addUser(first, last, email, password) {
 
 function addPictureUser(id, picture) {
     const q =
-        "UPDATE users SET pictures = array_prepend($2, pictures) WHERE id = $1 RETURNING pictures;";
+        "UPDATE users SET pictures = array_prepend($2, pictures), atpicture = $2 WHERE id = $1 RETURNING pictures, atpicture;";
     const params = [id, picture];
     return db.query(q, params);
 }

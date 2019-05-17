@@ -37,22 +37,28 @@ const uploader = multer({
     }
 });
 
-// app.post(
-//     "/api/self/uploadpic",
-//     requireUser,
-//     uploader.single("file"),
-//     s3.upload,
-//     (req, res) => {
-//         const pictureUrl = config.s3Url + req.file.filename;
-//         db.addPictureUser(req.session.user.id, pictureUrl)
-//             .then(({ rows }) => {
-//                 res.json(rows[0]);
-//             })
-//             .catch(err => {
-//                 console.log(err);
-//             });
-//     }
-// );
+app.post(
+    "/api/self/uploadpic",
+    requireUser,
+    uploader.single("file"),
+    (req, res) => {
+        const pictureUrl = path.join(
+            __dirname,
+            "..",
+            "/uploads/",
+            req.file.filename
+        );
+        db.addPictureUser(req.session.user.id, pictureUrl)
+            .then(({ rows }) => {
+                req.session.user.atpicture = rows[0].atpicture;
+                req.session.user.pictures = rows[0].pictures;
+                res.json(rows[0]);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+);
 
 app.post(
     "/api/article/uploadpic",

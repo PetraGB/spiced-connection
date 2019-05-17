@@ -11,3 +11,11 @@ export function setNewRead(readId) {
         readId
     };
 }
+
+export function updateUserPics(pictureDetails) {
+    return {
+        type: "UPDATE_USER_PICS",
+        pictures: pictureDetails.pictures,
+        atpicture: pictureDetails.atpicture
+    };
+}

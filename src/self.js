@@ -6,14 +6,17 @@ import { connect } from "react-redux";
 // import { setUserData } from "./actions";
 
 import Articlelink from "./articlelink";
+import Uploaderuser from "./uploaderuser";
 
 class Self extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            readArticles: []
+            readArticles: [],
+            uploaderVisible: false
         };
         this.fetchReadArticles = this.fetchReadArticles.bind(this);
+        this.toggleUploader = this.toggleUploader.bind(this);
     }
     componentDidMount() {
         this.fetchReadArticles();
@@ -34,20 +37,37 @@ class Self extends React.Component {
             })
             .catch();
     }
+    toggleUploader() {
+        if (this.state.uploaderVisible) {
+            this.setState({ uploaderVisible: false });
+        } else {
+            this.setState({ uploaderVisible: true });
+        }
+    }
     render() {
         return (
             <div className="profile verContainer">
                 {this.props.user ? (
                     <div className="profileComp">
-                        <div className="profilePic">
+                        <div
+                            onClick={this.toggleUploader}
+                            className="profilePic"
+                        >
                             <img
-                                src={this.props.user.picture || "/default.png"}
+                                src={
+                                    this.props.user.atpicture || "/default.png"
+                                }
                             />
                         </div>
                         <h3>
                             {this.props.user.first} {this.props.user.last}
                         </h3>
                         <p>{this.props.user.bio}</p>
+                        {this.state.uploaderVisible && (
+                            <Uploaderuser
+                                toggleUploader={this.toggleUploader}
+                            />
+                        )}
                         {this.props.user.read && this.state.readArticles && (
                             <React.Fragment>
                                 {this.state.readArticles.map(article => {

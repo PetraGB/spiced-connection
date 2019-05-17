@@ -16,5 +16,16 @@ export default function(state = {}, action) {
         };
     }
 
+    if (action.type == "UPDATE_USER_PICS") {
+        state = {
+            ...state,
+            user: {
+                ...state.user,
+                pictures: action.pictures,
+                atpicture: action.atpicture
+            }
+        };
+    }
+
     return state;
 }

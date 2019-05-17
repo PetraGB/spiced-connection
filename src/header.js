@@ -49,7 +49,7 @@ class Header extends React.Component {
                                 <div className="imageDiv">
                                     <img
                                         src={
-                                            this.props.user.picture ||
+                                            this.props.user.atpicture ||
                                             "/default.png"
                                         }
                                     />
