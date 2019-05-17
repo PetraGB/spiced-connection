@@ -34,6 +34,7 @@ require("./routers/validation");
 require("./routers/profiles");
 require("./routers/articles");
 require("./routers/links");
+require("./routers/files");
 
 app.get("*", function(req, res) {
     res.sendFile(__dirname + "/index.html");

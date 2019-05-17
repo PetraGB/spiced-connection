@@ -25,10 +25,10 @@ function addUser(first, last, email, password) {
     return db.query(q, params);
 }
 
-function addPictureUser(picture, atpicture, id) {
+function addPictureUser(id, picture) {
     const q =
-        "UPDATE users SET pictures = array_append(pictures, $1), atpicture = $2 WHERE id = $3;";
-    const params = [picture, atpicture, id];
+        "UPDATE users SET pictures = array_prepend($2, pictures) WHERE id = $1 RETURNING pictures;";
+    const params = [id, picture];
     return db.query(q, params);
 }
 
@@ -46,18 +46,18 @@ function addArticle(title, article, pictures, summary, writerid) {
     return db.query(q, params);
 }
 
-function addPictureArticle(picture, id) {
+function addPictureArticle(id, picture) {
     const q =
-        "UPDATE users SET pictures = array_append(pictures, $1) WHERE id = $2;";
-    const params = [picture, id];
+        "UPDATE articles SET pictures = array_prepend($2, pictures) WHERE id = $1 RETURNING pictures;";
+    const params = [id, picture];
     return db.query(q, params);
 }
 
-function setPicturesArticle(pictures, id) {
-    const q = "UPDATE users SET pictures = ARRAY $1 WHERE id = $2;";
-    const params = [pictures, id];
-    return db.query(q, params);
-}
+// function setPicturesArticle(id, pictures) {
+//     const q = "UPDATE articles SET pictures = ARRAY $2 WHERE id = $1;";
+//     const params = [id, pictures];
+//     return db.query(q, params);
+// }
 
 function updateArticle(id, title, article, pictures, summary, writerid) {
     const q =
@@ -133,7 +133,6 @@ module.exports = {
     getProfileById,
     addArticle,
     addPictureArticle,
-    setPicturesArticle,
     updateArticle,
     publishArticle,
     getArticle,

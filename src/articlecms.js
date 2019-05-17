@@ -4,6 +4,8 @@ import axios from "./axios";
 import { connect } from "react-redux";
 // import { Link } from "react-router-dom";
 
+import Uploaderart from "./uploaderart";
+
 class Articlecms extends React.Component {
     constructor(props) {
         super(props);
@@ -17,12 +19,15 @@ class Articlecms extends React.Component {
                 uploaded: "",
                 published: "",
                 publish: false
-            }
+            },
+            uploaderVisible: false
         };
         this.inputting = this.inputting.bind(this);
         this.uploadArticle = this.uploadArticle.bind(this);
         this.updatePublish = this.updatePublish.bind(this);
         this.publish = this.publish.bind(this);
+        this.toggleUploader = this.toggleUploader.bind(this);
+        this.updateArticlePics = this.updateArticlePics.bind(this);
     }
     componentDidMount() {
         const id = this.props.match.params.id;
@@ -96,6 +101,19 @@ class Articlecms extends React.Component {
             })
             .catch();
     }
+    toggleUploader() {
+        if (this.state.uploaderVisible) {
+            this.setState({ uploaderVisible: false });
+        } else {
+            this.setState({ uploaderVisible: true });
+        }
+    }
+    updateArticlePics(pictures) {
+        this.setState({
+            currentArticle: { ...this.state.currentArticle, pictures }
+        });
+        console.log(this.state);
+    }
     render() {
         return (
             <div className="articlecms verContainer">
@@ -146,6 +164,28 @@ class Articlecms extends React.Component {
                                         Upload
                                     </button>
                                 </form>
+
+                                {!!this.state.currentArticle.id && (
+                                    <div>
+                                        <button onClick={this.toggleUploader}>
+                                            Upload picture
+                                        </button>
+                                        {this.state.uploaderVisible && (
+                                            <Uploaderart
+                                                toggleUploader={
+                                                    this.toggleUploader
+                                                }
+                                                updateArticlePics={
+                                                    this.updateArticlePics
+                                                }
+                                                id={
+                                                    this.state.currentArticle.id
+                                                }
+                                            />
+                                        )}
+                                    </div>
+                                )}
+
                                 {this.props.user.status > 2 && (
                                     <div className="editorSecArt">
                                         <form className="horContainer">
