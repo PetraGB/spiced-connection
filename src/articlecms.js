@@ -166,7 +166,7 @@ class Articlecms extends React.Component {
                                 </form>
 
                                 {!!this.state.currentArticle.id && (
-                                    <div>
+                                    <div className="horContainer">
                                         <button onClick={this.toggleUploader}>
                                             Upload picture
                                         </button>
