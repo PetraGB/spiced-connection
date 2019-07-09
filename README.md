@@ -7,7 +7,7 @@ Back then the thesis was presented with a mock-up for the interaction. While at 
 ### Viewing
 
 All pages where links to articles are presented to readers show unread articles higher up. This happens after users log in, because only then can we keep track consistently of what has been read.
-![Links have other ranking after one was read](http://g.recordit.co/3WNEWM1duf.gif)
+![Links change rank](http://g.recordit.co/3WNEWM1duf.gif)
 
 ### Adding articles
 
@@ -17,7 +17,7 @@ Journalists use the same login system as readers, but get to see other options t
 ### Adding links
 
 After an article is uploaded it is not immediately visible for readers. It first has to be checked by an editor and published. Part of this process includes addition of links between that article and others.
-![Editor adds link and publishes article](http://g.recordit.co/DpCFrrdcWA.gif)
+![Editor options](http://g.recordit.co/DpCFrrdcWA.gif)
 
 ### Yet to come
 
