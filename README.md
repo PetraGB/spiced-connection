@@ -12,12 +12,12 @@ All pages where links to articles are presented to readers show unread articles 
 ### Adding articles
 
 Journalists use the same login system as readers, but get to see other options thanks to conditional rendering of React components. So far what they see is a link to a CMS form where they can upload a new article.
-![Journalist login and article upload](http://g.recordit.co/SkVRhs2vUg.gif)
+![Journalist login and article upload](demo/demo2.gif)
 
 ### Adding links
 
 After an article is uploaded it is not immediately visible for readers. It first has to be checked by an editor and published. Part of this process includes addition of links between that article and others.
-![Editor options](http://g.recordit.co/DpCFrrdcWA.gif)
+![Editor options](demo/demo3.gif)
 
 ### Yet to come
 
