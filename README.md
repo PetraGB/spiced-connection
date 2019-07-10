@@ -7,7 +7,7 @@ Back then the thesis was presented with a mock-up for the interaction. While at 
 ### Viewing
 
 All pages where links to articles are presented to readers show unread articles higher up. This happens after users log in, because only then can we keep track consistently of what has been read.
-![](http://g.recordit.co/3WNEWM1duf.gif)
+![Articles change order after reading](demo/demo1.gif)
 
 ### Adding articles
 
