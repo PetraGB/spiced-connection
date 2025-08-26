@@ -31,7 +31,7 @@
         "eslint-plugin-react": "^7.12.4",
         "express": "^4.14.0",
         "http-proxy-middleware": "^0.19.1",
-        "jest": "^24.7.1",
+        "jest": "^30.0.4",
         "knox-s3": "^0.9.5",
         "multer": "^1.3.0",
         "react": "^16.8.6",
